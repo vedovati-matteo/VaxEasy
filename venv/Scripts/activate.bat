@@ -8,7 +8,7 @@ if defined _OLD_CODEPAGE (
     "%SystemRoot%\System32\chcp.com" 65001 > nul
 )
 
-set VIRTUAL_ENV=C:\Users\vedov\Desktop\UNI\Corsi\DB Web\Project\Progetto\venv
+set VIRTUAL_ENV=D:\ALESSANDRO\Università\SECONDO anno\Basi di dati e web\vaxEasy\VaxEasy\venv
 
 if not defined PROMPT set PROMPT=$P$G
 
