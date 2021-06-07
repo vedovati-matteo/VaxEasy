@@ -5,34 +5,34 @@
 {% block content %}
 
 <div class="text-center">
-	<form style="max-width:720px;margin:auto" action="./landing" method="POST">
+	<form style="max-width:720px;margin:auto" action="/landing" method="POST">
 		<h1 class="mt-5 mb-4">Sign In</h2>
-			<div class="input-group mb-3">
-				<span class="input-group-text">Nome</span>
-				<input type="text" required name="nome" class="form-control" placeholder="Mario">
-				<span class="input-group-text">Cognome</span>
-				<input type="text" required name="cognome" class="form-control" placeholder="Rossi">
-			</div>
-			<div class="input-group mb-3">
-				<span class="input-group-text">Codice Fiscale</span>
-				<input type="text" required name="cf" class="form-control" placeholder="RSSMRA85T10A562S">
-				<span class="input-group-text">Provincia</span>
-				<select class="form-select" name="provincia">
-					<option value="1">Bergamo</option>
-					<option value="2">Brescia</option>
-					<option value="3">Milano</option>
-				  </select>
-			</div>
-			<div class="input-group mb-3">
-				<span class="input-group-text">Numero Telefono</span>
-				<input type="tel" required name="tel" class="form-control" placeholder="0000000000">
-				<span class="input-group-text">Password</span>
-				<input type="password" required name="pw" class="form-control" placeholder="password">
-			</div>
-			<div class="input-group mb-3">
-				<span class="input-group-text">E-mail</span>
-				<input type="email" required name="email" class="form-control" placeholder="username@example.com">
-			</div>
+		<div class="input-group mb-3">
+			<span class="input-group-text">Nome</span>
+			<input type="text" required name="nome" class="form-control" placeholder="Mario">
+			<span class="input-group-text">Cognome</span>
+			<input type="text" required name="cognome" class="form-control" placeholder="Rossi">
+		</div>
+		<div class="input-group mb-3">
+			<span class="input-group-text">Codice Fiscale</span>
+			<input type="text" required name="cf" class="form-control" placeholder="RSSMRA85T10A562S">
+			<span class="input-group-text">Provincia</span>
+			<select class="form-select" name="provincia">
+				<option value="BG">Bergamo</option>
+				<option value="BS">Brescia</option>
+				<option value="MI">Milano</option>
+				</select>
+		</div>
+		<div class="input-group mb-3">
+			<span class="input-group-text">Numero Telefono</span>
+			<input type="tel" required name="tel" class="form-control" placeholder="0000000000">
+			<span class="input-group-text">Password</span>
+			<input type="password" required name="pw" class="form-control" placeholder="password">
+		</div>
+		<div class="input-group mb-3">
+			<span class="input-group-text">E-mail</span>
+			<input type="email" required name="email" class="form-control" placeholder="username@example.com">
+		</div>
 		<button type="submit" class="btn btn-primary">Submit</button>
 	</form>	
 </div>
