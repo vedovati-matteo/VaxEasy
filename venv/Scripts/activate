@@ -37,7 +37,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV="C:\Users\vedov\Desktop\UNI\Corsi\DB Web\Project\Progetto\venv"
+VIRTUAL_ENV="D:\ALESSANDRO\Università\SECONDO anno\Basi di dati e web\vaxEasy\VaxEasy\venv"
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"
