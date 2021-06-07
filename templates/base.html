@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+  <head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<!-- Required meta tags -->
+		<link rel="stylesheet" href="{{url_for('static', filename='scss/custom.css')}}">
+		<link rel="icon" href="{{url_for('static', filename='img/icon.svg')}}">
+
+		<title>{% block title %}{% endblock %}</title>
+	</head>
+	<body>
+		<nav class="navbar navbar-expand  navbar-light bg-primary">
+			<div class="container-fluid">
+				<a class="navbar-brand" href="/">
+					<img src="{{url_for('static', filename='img/logo.svg')}}" alt="" width="36" height="30" class="d-inline-block align-text-top">
+					<strong>VaxEasy</strong>
+				</a>
+				<ul class="navbar-nav me-auto">
+					<li class="nav-item">
+						<a class="nav-link active" aria-current="page" href="/">Home</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="#">Features</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="#">Pricing</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+					</li>
+				</ul>
+				<ul class="navbar-nav ms-auto">
+					<li class="nav-item">
+						<a class="nav-link" href="signin">
+							<img src="{{url_for('static', filename='img/signin.svg')}}" alt="" width="20" height="18">
+							Sing in
+						</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="login">
+							<img src="{{url_for('static', filename='img/login.svg')}}" alt="" width="20" height="18" >
+							Login
+						</a>
+					</li>
+				</ul>
+			</div>
+		</nav>
+		<div class="container">
+			{% block content %}{% endblock %}
+		</div>
+		<footer class="footer fixed-bottom bg-light">
+			<div class="container">
+			  <span class="text-muted">Place sticky footer content here.</span>
+			</div>
+		</footer>
+	</body>
+</html>

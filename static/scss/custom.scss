@@ -1,0 +1,19 @@
+
+/* import only the necessary Bootstrap files */
+@import "../../bootstrap/scss/functions";
+@import "../../bootstrap/scss/variables";
+@import "../../bootstrap/scss/mixins";
+/* -------begin customization-------- */
+/* change the primary theme color to red */
+$primary: #3fc380;
+$theme-colors: (
+  primary: #3fc380
+);
+
+#checkboxLogin:checked {
+  background-color: $primary
+}
+
+/* -------end customization-------- */
+/* finally, import Bootstrap to set the changes! */
+@import "../../bootstrap/scss/bootstrap";
