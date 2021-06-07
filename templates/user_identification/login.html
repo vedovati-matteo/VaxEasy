@@ -5,15 +5,15 @@
 {% block content %}
 
 <div class="text-center">
-	<form style="max-width:360px;margin:auto">
-		<h1 class="mt-5">Login</h2>
-		<div class="mb-3">
-			<label for="exampleInputEmail1" class="form-label">Codice Fiscale</label>
-			<input type="email" class="form-control">
+	<form style="max-width:380px;margin:auto" action="/landing" method="POST">
+		<h1 class="mt-5 mb-4">Login</h2>
+		<div class="input-group mb-3">
+			<span class="input-group-text">Codice Fiscale</span>
+			<input type="text" required name="cf" class="form-control" placeholder="RSSMRA85T10A562S">
 		</div>
-		<div class="mb-3">
-			<label for="exampleInputPassword1" class="form-label">Password</label>
-			<input type="password" class="form-control">
+		<div class="input-group mb-3">
+			<span class="input-group-text">Password</span>
+			<input type="password" required name="pw" class="form-control" placeholder="password">
 		</div>
 		<button type="submit" class="btn btn-primary">Submit</button>
 	</form>	
