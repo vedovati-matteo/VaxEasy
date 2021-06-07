@@ -20,8 +20,7 @@ class Vaccino(db.Model):
         self.__dict__.update(state)
 
 
-# Create a User object from its json representation in session["user"]
-def get_vax_from_json(json):
+def get_vax_from_json(json):    # lasciare o togliere?
     return jsonpickle.decode(json)
 
 

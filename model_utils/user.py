@@ -36,7 +36,7 @@ class Utente(db.Model):
 
 
 # Create a User object from its json representation in session["user"]
-def get_user_from_json(json):
+def get_user_from_json(json):    # lasciare o togliere?
     return jsonpickle.decode(json)
 
 
