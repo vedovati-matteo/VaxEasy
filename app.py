@@ -1,11 +1,11 @@
 from flask import Flask, render_template, request, session, redirect, url_for
 
 app = Flask(__name__)
+app.secret_key = "super secret key"
 
 @app.route('/')
-def login():
-    # Simply render the template in templates/login/login.html
-    return render_template("basic/home.html")
+def initPage():
+    return redirect(url_for("home"))
 
 @app.route('/home')
 def home():
