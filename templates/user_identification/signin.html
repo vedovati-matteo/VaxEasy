@@ -15,17 +15,23 @@
 			</div>
 			<div class="input-group mb-3">
 				<span class="input-group-text">Codice Fiscale</span>
-				<input type="text" required class="form-control" placeholder="RSSMRA85T10A562S">
-				<span class="input-group-text">Password</span>
-				<input type="password" required class="form-control" placeholder="password">
+				<input type="text" required name="cf" class="form-control" placeholder="RSSMRA85T10A562S">
+				<span class="input-group-text">Provincia</span>
+				<select class="form-select" name="provincia">
+					<option value="1">Bergamo</option>
+					<option value="2">Brescia</option>
+					<option value="3">Milano</option>
+				  </select>
 			</div>
 			<div class="input-group mb-3">
 				<span class="input-group-text">Numero Telefono</span>
-				<input type="tel" required class="form-control" placeholder="0000000000">
+				<input type="tel" required name="tel" class="form-control" placeholder="0000000000">
+				<span class="input-group-text">Password</span>
+				<input type="password" required name="pw" class="form-control" placeholder="password">
 			</div>
 			<div class="input-group mb-3">
 				<span class="input-group-text">E-mail</span>
-				<input type="email" required class="form-control" placeholder="username@example.com">
+				<input type="email" required name="email" class="form-control" placeholder="username@example.com">
 			</div>
 		<button type="submit" class="btn btn-primary">Submit</button>
 	</form>	
