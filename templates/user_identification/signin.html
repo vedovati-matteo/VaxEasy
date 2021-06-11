@@ -5,7 +5,7 @@
 {% block content %}
 
 <div class="text-center">
-	<form style="max-width:720px;margin:auto" action="/landing" method="POST">
+	<form style="max-width:720px;margin:auto" action="/landingSignin" method="POST">
 		<h1 class="mt-5 mb-4">Sign In</h2>
 		<div class="input-group mb-3">
 			<span class="input-group-text">Nome</span>
@@ -21,7 +21,7 @@
 				<option value="BG">Bergamo</option>
 				<option value="BS">Brescia</option>
 				<option value="MI">Milano</option>
-				</select>
+			</select>
 		</div>
 		<div class="input-group mb-3">
 			<span class="input-group-text">Numero Telefono</span>
@@ -33,9 +33,31 @@
 			<span class="input-group-text">E-mail</span>
 			<input type="email" required name="email" class="form-control" placeholder="username@example.com">
 		</div>
+		<div style="max-width:270px;margin:auto" class="accordion accordion-flush mb-3" id="accordionFlushExample">
+			<div class="accordion-item">
+			  <h2 class="accordion-header" id="flush-headingOne">
+				<button style="max-height:30px" class="accordion-button collapsed" id="accordionBtn" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+				  Allergie
+				</button>
+			  </h2>
+			  <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+				<div class="accordion-body text-start">
+					{% for allergia in allergie %}
+					<ul class="list-group">
+						<li class="list-group-item">
+							<input class="form-check-input" type="checkbox" name="{{ allergia }}">
+							{{ allergia }}
+						</li>
+					</ul>
+					{% endfor %}
+				</div>
+			  </div>
+			</div>
+		  </div>
 		<button type="submit" class="btn btn-primary">Submit</button>
 	</form>	
 </div>
+
 
 	
 

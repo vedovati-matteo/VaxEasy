@@ -6,14 +6,71 @@
 
 <div class="text-center">
 	<h2 class="mt-5 mb-4">Profilo</h2>
-	<div class="row">
-		<div class="col">
-		  Codice Fiscale
-		</div>
-		<div class="col">
-		  {{ session.user }}
-		</div>
-	  </div>
+	<div style="max-width:550px;margin:auto" class="list-group text-start">
+		<a href="#" class="list-group-item list-group-item-action" aria-current="true">
+			<div class="row">
+				<div class="col-4">
+				  Nome
+				</div>
+				<div class="col-5">
+					{{ session.user.nome }}
+				</div>
+			</div>
+		</a>
+		<a href="#" class="list-group-item list-group-item-action" aria-current="true">
+			<div class="row">
+				<div class="col-4">
+				  Cognome
+				</div>
+				<div class="col-5">
+					{{ session.user.cognome }}
+				</div>
+			</div>
+		</a>
+		<a href="#" class="list-group-item list-group-item-action" aria-current="true">
+			<div class="row">
+				<div class="col-4">
+				  Codice Fiscale
+				</div>
+				<div class="col-5">
+					{{ session.user.cf }}
+				</div>
+			</div>
+		</a>
+		<a href="#" class="list-group-item list-group-item-action" aria-current="true">
+			<div class="row">
+				<div class="col-4">
+				  Numero di Telefono
+				</div>
+				<div class="col-5">
+					{{ session.user.tel }}
+				</div>
+			</div>
+		</a>
+		<a href="#" class="list-group-item list-group-item-action" aria-current="true">
+			<div class="row">
+				<div class="col-4">
+				  Email
+				</div>
+				<div class="col-5">
+					{{ session.user.email }}
+				</div>
+			</div>
+		</a>
+		<a href="#" class="list-group-item list-group-item-action" aria-current="true">
+			<div class="row">
+				<div class="col-4">
+				  Allergie
+				</div>
+				<div class="col-5">
+					{% for a in session.user.allergie %}
+						{{ a if session.user.allergie[a] else ""}}
+					{% endfor %}
+				</div>
+			</div>
+		</a>
+	</div>
+	
 </div>
 	
 {% endblock %}
