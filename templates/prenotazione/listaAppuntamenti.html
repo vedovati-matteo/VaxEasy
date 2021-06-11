@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<div style="max-width:600px;margin:auto">
+	<h2 class="text-center mt-5">Lista Prenotazioni Disponibili:</h2>
+	{% if appuntamenti | length > 0 %}
+	<div class="row ms-1 mb-2 mt-4">
+		<div class="col-4">
+			data:
+		</div>
+		<div class="col-5">
+			luogo:
+		</div>
+	</div>
+	<ul class="list-group">
+		{% for p in appuntamenti %}
+			<a href="prenotazione?codice={{p.codice}}" class="list-group-item list-group-item-action" aria-current="true">
+				<div class="row">
+					<div class="col-4">
+						{{ p.data + " " + p.ora }}
+					</div>
+					<div class="col-5">
+						{{ p.luogo + " (" + p.provincia + ")" }}
+					</div>
+				</div>
+			</a>
+		{% endfor %}
+	</ul>
+	{% else %}
+		<p>Non ci sono prenotazioni disponibili</p>
+	{% endif %}
+</div>
+{% endblock %}

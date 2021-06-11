@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<div style="max-width:600px;margin:auto">
+	<h2 class="text-center mt-5 mb-3">Prenotazione:</h2>
+	<p>In data <strong>{{ appuntamento.data }}</strong> alle ore <strong>{{ appuntamento.ora }}</strong> presso <strong>{{ appuntamento.luogo }}</strong></p>
+	<form action="/prenota?codice={{appuntamento.codice}}" method="POST">
+		<h4 class="ms-3 mb-3">Scegli Vaccino:</h4>
+		<div class="list-group">
+			{% for v in vaccini %}
+				<input type="radio" name="codiceVaccino" value="{{v.codice}}" id="{{v.codice}}" />
+				<label class="list-group-item" for="{{v.codice}}">
+					<p>
+					<strong>{{ v.nome }}</strong> {{ v.casaFarmaceutica }} <br> {{ v.descrizione}}
+					{% if v.richiamo != False %}
+						<small><br>richiamo: {{ v.richiamo }}</small>
+					{% endif %}
+					</p>
+				</label>
+			{% endfor %}
+		</div>
+		<div class="text-center">
+			<button type="submit" class="btn btn-primary mt-4">Submit</button>
+		</div>
+	</form>
+	
+</div>
+{% endblock %}

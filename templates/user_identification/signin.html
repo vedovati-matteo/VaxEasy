@@ -37,16 +37,16 @@
 			<div class="accordion-item">
 			  <h2 class="accordion-header" id="flush-headingOne">
 				<button style="max-height:30px" class="accordion-button collapsed" id="accordionBtn" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-				  Allergie
+				  Patologie
 				</button>
 			  </h2>
 			  <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
 				<div class="accordion-body text-start">
-					{% for allergia in allergie %}
+					{% for patologia in patologie %}
 					<ul class="list-group">
 						<li class="list-group-item">
-							<input class="form-check-input" type="checkbox" name="{{ allergia }}">
-							{{ allergia }}
+							<input class="form-check-input" type="checkbox" name="{{ patologia }}">
+							{{ patologia }}
 						</li>
 					</ul>
 					{% endfor %}

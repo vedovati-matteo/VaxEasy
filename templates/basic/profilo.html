@@ -60,11 +60,11 @@
 		<a href="#" class="list-group-item list-group-item-action" aria-current="true">
 			<div class="row">
 				<div class="col-4">
-				  Allergie
+				  Patologie
 				</div>
 				<div class="col-5">
-					{% for a in session.user.allergie %}
-						{{ a if session.user.allergie[a] else ""}}
+					{% for a in session.user.patologie %}
+						{{ a if session.user.patologie[a] else ""}}
 					{% endfor %}
 				</div>
 			</div>
