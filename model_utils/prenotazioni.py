@@ -36,7 +36,7 @@ class Prenotazione(db.Model):
 
 
 # recupera tutte le prenotazioni di un utente
-def get_appuntamento_by_code(cf):
+def get_prenotazione_by_cf(cf):
     return Prenotazione.query.filter_by(cf=cf).first()
 
 
