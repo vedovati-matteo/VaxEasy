@@ -6,11 +6,11 @@ from flask_resize import Resize
 import os
 
 app = Flask(__name__)
+app.secret_key = "super secret key"
 
 @app.route('/')
-def login():
-    # Simply render the template in templates/login/login.html
-    return render_template("basic/home.html")
+def initPage():
+    return redirect(url_for("home"))
 
 @app.route('/home')
 def home():
@@ -23,6 +23,10 @@ def login():
 @app.route('/signin')
 def signin():
 	return render_template("user_identification/signin.html")
+
+@app.route('/profilo')
+def profilo():
+	return render_template("basic/profilo.html")
 
 @app.route('/landing', methods=["POST"])
 def land():
@@ -41,6 +45,11 @@ def land():
 			session["user"] = logged_user.to_json()
 			return render_template("login/logged.html", user=logged_user)
 	return redirect(url_for("home"))"""
+
+@app.route('/logout')
+def logout():
+	session.clear()
+	return redirect(url_for("home"))
 
 if __name__ == '__main__':
 	app.run(host='0.0.0.0', port=5000, debug=True)

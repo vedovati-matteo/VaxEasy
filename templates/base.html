@@ -25,6 +25,20 @@
 					</li>
 				</ul>
 				<ul class="navbar-nav ms-auto">
+					{% if "user" in session %}
+					<li class="nav-item">
+						<a class="nav-link" href="profilo">
+							<img src="{{url_for('static', filename='img/signin.svg')}}" alt="" width="20" height="18">
+							Profilo
+						</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="logout">
+							<img src="{{url_for('static', filename='img/login.svg')}}" alt="" width="20" height="18" >
+							Logout
+						</a>
+					</li>
+					{% else %}
 					<li class="nav-item">
 						<a class="nav-link" href="signin">
 							<img src="{{url_for('static', filename='img/signin.svg')}}" alt="" width="20" height="18">
@@ -37,6 +51,7 @@
 							Login
 						</a>
 					</li>
+					{% endif %}
 				</ul>
 			</div>
 		</nav>
