@@ -50,7 +50,7 @@ def add_prenotazione(new_cf, new_vaccino, new_codice_appuntamento):
     db.session.commit()
 
 def setPrenotazione(cf, codPren, codVaccino):
-    return (Prenotazione.query.get((cf, codVaccino, codPren)) != None)
+    return (Prenotazione.query.filter_by(cf=cf, codVaccino=codVaccino, codPren=codPren) != None)
 
 def getPrenotazioni(cf):   # appuntamento, centro vaccinale e vaccino
      return {prenotazioni.codice:prenotazioni for prenotazioni in Prenotazione.query(Prenotazione).\

@@ -58,7 +58,7 @@ def getAppuntamento(codice): # ritorna il singolo appuntamento dato il codice   
 		return None
 
 def getVaccini(cf): # ritorna tutti i vaccini possibili per l'utente dato il codice fiscale
-	# controllo cf
+	# controllo cf    -> vaccini.py - getVaccini()
 	return (
 		{ "codice": "CZ234", "nome": "COVID-19", "casaFarmaceutica":"Moderna", "descrizione": "prova prova", "richiamo": "1 mese"},
 		{ "codice": "PF347", "nome": "COVID-19", "casaFarmaceutica":"Pfizer", "descrizione": "prova pippo", "richiamo": "1 mese"},
@@ -69,7 +69,7 @@ def getVaccini(cf): # ritorna tutti i vaccini possibili per l'utente dato il cod
 def setPrenotazione(cf, codPren, codVaccino): # dato il codice fiscale, codice della prenotazione e codice del vaccino crea una prenotazione, ritorna True se avvenuta altrimenti False
 	return True    # -> prenotazioni.py - setPrenotazione()
 
-def getPrenotazioni(cf): # ritorna le prenotazione dell'utente dato codice fiscale   -> prenotazione.py - getPrenotazioni()
+def getPrenotazioni(cf): # ritorna le prenotazione dell'utente dato codice fiscale   -> prenotazione.py - getPrenotazioni()	
 	return (
 		{ "codiceAppuntamento": "BG134","luogo": "fiera", "provincia":"BG", "data": "30/08/2021", "ora":"9.30", "codiceVaccino": "PF347", "nome": "COVID-19", "casaFarmaceutica":"Pfizer", "descrizione": "prova pippo", "richiamo": "1 mese" },
 	)

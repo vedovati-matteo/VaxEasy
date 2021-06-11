@@ -1,3 +1,5 @@
+from model_utils.patologie import Patologia
+from model_utils.patologieUtente import PatologiaUtente
 import jsonpickle
 from app import db
 
@@ -71,9 +73,16 @@ def get_users():
     return {user.cf:user for user in Utente.query.all()}
 
 
-# Recover a user by its CF
-def get_user_by_cf(cf):
-    return Utente.query.filter_by(cf=cf)
+# Recover a user by its CF with patologie
+def get_user_by_cf(cf1):
+    patologie = {Patologia.nome:nome for nome in Patologia.query.select(Patologia.nome)}
+    for pat in Utente.query(PatologiaUtente).join(Utente,PatologiaUtente.cf).filter_by(cf=cf1).select(Patologia.nome):
+        if(PatologiaUtente.query.filter_by(cf = cf1)!=None):
+            patologie[pat.nome] = True
+        else:
+            patologie[pat.nome] = False
+        
+    return {Utente.query.filter_by(cf=cf1).all(),patologie}
 
 
 
