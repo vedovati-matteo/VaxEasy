@@ -8,11 +8,35 @@ import os
 app = Flask(__name__)
 app.secret_key = "super secret key"
 
-# funz da fare
-def getPatologie ():
+
+# ______funz da fare
+
+def getUserByCf(cf): # ritorna i campi dato il cf
+	patologie = {}
+	for a in getPatologie():
+		patologie[a] = False
+	
+	campi = {
+		"cf": cf,
+		"nome": "",
+		"cognome": "",
+		"provincia": "",
+		"tel": "",
+		"email": "",
+		"patologie": patologie
+	}
+	return campi # se non c'è: return False
+
+def checkPassword(cf, pw): # controlla la password (con hash)
+	return True
+
+def getPatologie (): # ritorna la lista di patologie (solo nome)
 	return ('Prova1', 'Pippo', 'foo')
 
-def getAppuntamenti ():
+def createUser(campi): # crea un user con i campi specificati e ritorna True se è avvenuto con successo, altrimenti False
+	return True
+
+def getAppuntamenti (provincia): # ritorna tutti gli appuntamenti disponibili per una provincia
 	return (
 		{ "codice": "BG123","luogo": "fiera", "provincia":"BG", "data": "17/08/2021", "ora":"17.30" },
 		{ "codice": "BG134","luogo": "fiera", "provincia":"BG", "data": "30/08/2021", "ora":"9.30" },
@@ -20,7 +44,7 @@ def getAppuntamenti ():
 		{ "codice": "BG401","luogo": "trescore", "provincia":"BG", "data": "06/09/2021", "ora":"12.00" }
 	)
 
-def getAppuntamento(codice):
+def getAppuntamento(codice): # ritorna il singolo appuntamento dato il codice
 	appuntamenti = (
 		{ "codice": "BG123","luogo": "fiera", "provincia":"BG", "data": "17/08/2021", "ora":"17.30" },
 		{ "codice": "BG134","luogo": "fiera", "provincia":"BG", "data": "30/08/2021", "ora":"9.30" },
@@ -33,7 +57,7 @@ def getAppuntamento(codice):
 			return a
 		return None
 
-def getVaccini(cf):
+def getVaccini(cf): # ritorna tutti i vaccini possibili per l'utente dato il codice fiscale
 	# controllo cf
 	return (
 		{ "codice": "CZ234", "nome": "COVID-19", "casaFarmaceutica":"Moderna", "descrizione": "prova prova", "richiamo": "1 mese"},
@@ -42,15 +66,15 @@ def getVaccini(cf):
 		{ "codice": "MZ234", "nome": "Streptococco", "casaFarmaceutica":"Moderna", "descrizione": "17/08/2021", "richiamo": False}
 	)
 
-def setPrenotazione(cf, codPren, codVaccino):
+def setPrenotazione(cf, codPren, codVaccino): # dato il codice fiscale, codice della prenotazione e codice del vaccino crea una prenotazione, ritorna True se avvenuta altrimenti False
 	return True
 
-def getPrenotazioni(cf):
+def getPrenotazioni(cf): # ritorna le prenotazione dell'utente dato codice fiscale
 	return (
 		{ "codiceAppuntamento": "BG134","luogo": "fiera", "provincia":"BG", "data": "30/08/2021", "ora":"9.30", "codiceVaccino": "PF347", "nome": "COVID-19", "casaFarmaceutica":"Pfizer", "descrizione": "prova pippo", "richiamo": "1 mese" },
 	)
 
-
+# ______fine funz da fare
 
 # ====> HOME
 @app.route('/')
@@ -69,34 +93,17 @@ def login():
 
 @app.route('/landingLogin', methods=["POST"])
 def landLogin():
-	patologie = {}
-	for a in getPatologie():
-		patologie[a] = False
 
-	campi = {
-		"cf": request.form.get("cf"),
-		"nome": "",
-		"cognome": "",
-		"provincia": "",
-		"tel": "",
-		"email": "",
-		"pw": request.form.get("pw"),
-		"patologie": patologie
-	}
-	session["user"] = {"cf": request.form.get("cf")}
-	return redirect(url_for("home"))
+	campi = getUserByCf(request.form.get("cf"))
 
-	"""# Recover the user by its username
-	logged_user = getUserByCf(request.form.get("cf"))
-
-	# If a user has been recovered
-	if logged_user:
-		# Check that the provided password its correct
-		if checkPassword(logged_user.cf, request.form.get("pw")):
-			# Create a Flask session for the logged user
-			session["user"] = logged_user.to_json()
-			return render_template("login/logged.html", user=logged_user)
-	return redirect(url_for("home"))"""
+	if campi:
+		# check password
+		if checkPassword(campi["cf"], request.form.get("pw")):
+	
+			session["user"] = campi
+			return redirect(url_for("home"))
+	
+	return redirect(url_for("login"))
 
 
 # ====> SIGNIN
@@ -118,23 +125,14 @@ def landSignin():
 		"provincia": request.form.get("provincia"),
 		"tel": request.form.get("tel"),
 		"email": request.form.get("email"),
-		"pw": request.form.get("pw"),
 		"patologie": patologie
 	}
-	session["user"] = campi
-	return redirect(url_for("home"))
 
-	"""# Recover the user by its username
-	logged_user = getUserByCf(request.form.get("cf"))
+	if createUser(campi):
+		return redirect(url_for("login"))
+	else:
+		return redirect(url_for("signin"))
 
-	# If a user has been recovered
-	if logged_user:
-		# Check that the provided password its correct
-		if checkPassword(logged_user.cf, request.form.get("pw")):
-			# Create a Flask session for the logged user
-			session["user"] = logged_user.to_json()
-			return render_template("login/logged.html", user=logged_user)
-	return redirect(url_for("home"))"""
 
 # ====> PROFILO
 @app.route('/profilo')
@@ -153,7 +151,7 @@ def logout():
 @app.route('/listaAppuntamenti')
 def listaAppuntamenti():
 
-	return render_template("prenotazione/listaAppuntamenti.html", appuntamenti=getAppuntamenti())
+	return render_template("prenotazione/listaAppuntamenti.html", appuntamenti=getAppuntamenti(session["user"]["provincia"]))
 
 @app.route('/prenotazione', methods=["GET"])
 def prenotazione():
