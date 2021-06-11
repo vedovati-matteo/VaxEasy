@@ -44,7 +44,7 @@ def get_centroVaccinale():
 
 # Recover a centroVaccinale by its code
 def get_centroVaccinale_by_code(id_centroVacc):
-    return CentroVaccinale.query.filter_by(id_centroVacc=id_centroVacc).first()
+    return CentroVaccinale.query.filter_by(id_centroVacc=id_centroVacc)
 
 
 

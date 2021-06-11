@@ -35,6 +35,11 @@ class Prenotazione(db.Model):
         self.__dict__.update(state)
 
 
+# recupera tutte le prenotazioni di un utente
+def get_prenotazione_by_cf(cf):
+    return Prenotazione.query.filter_by(cf=cf)
+
+
 # Add a new prenotazione to the database
 def add_prenotazione(new_cf, new_vaccino, new_codice_appuntamento):
     db.session.add(Prenotazione(new_cf, new_vaccino, new_codice_appuntamento))

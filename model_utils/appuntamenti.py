@@ -44,7 +44,7 @@ def get_appuntamento():
 
 # Recover a appuntamento by its code
 def get_appuntamento_by_code(codice):
-    return Appuntamento.query.filter_by(codice=codice).first()
+    return Appuntamento.query.filter_by(codice=codice)
 
 
 

@@ -37,8 +37,8 @@ def get_patologia():
 
 
 # Recover a patologia by its code
-def get_patologia_by_code(nome):
-    return Patologia.query.filter_by(nome=nome).first()
+def get_patologia_by_name(nome):
+    return Patologia.query.filter_by(nome=nome)
 
 
 

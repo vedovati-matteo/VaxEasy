@@ -45,7 +45,7 @@ def get_vax():
 
 # Recover a vax by its code
 def get_vax_by_code(codice):
-    return Vaccino.query.filter_by(codice=codice).first()
+    return Vaccino.query.filter_by(codice=codice)
 
 
 
