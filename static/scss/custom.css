@@ -1,10 +1,6 @@
 /* import only the necessary Bootstrap files */
 /* -------begin customization-------- */
 /* change the primary theme color to red */
-#checkboxLogin:checked {
-  background-color: #3fc380;
-}
-
 /* -------end customization-------- */
 /* finally, import Bootstrap to set the changes! */
 /*!
