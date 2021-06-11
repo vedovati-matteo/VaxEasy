@@ -27,7 +27,6 @@ _placeholderPatologiaUtente_gen()
 _placeholderPatologiaVaccino_gen()
 _placeholderMalattia_gen()
 _placeholderVaccinoMalattia_gen()
-
 _gen_placeholder_passwords()
 users = Utente.query.all()
 enti = Ente.query.all()
