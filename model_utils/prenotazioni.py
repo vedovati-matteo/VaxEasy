@@ -1,3 +1,7 @@
+from model_utils.centriVaccinali import CentroVaccinale
+from model_utils.vaccini import Vaccino
+from model_utils.appuntamenti import Appuntamento
+from model_utils.user import Utente
 import jsonpickle
 from app import db
 
@@ -44,5 +48,13 @@ def get_prenotazione_by_cf(cf):
 def add_prenotazione(new_cf, new_vaccino, new_codice_appuntamento):
     db.session.add(Prenotazione(new_cf, new_vaccino, new_codice_appuntamento))
     db.session.commit()
+
+def setPrenotazione(cf, codPren, codVaccino):
+    return (Prenotazione.query.get((cf, codVaccino, codPren)) != None)
+
+def getPrenotazioni(cf):   # appuntamento, centro vaccinale e vaccino
+     return {prenotazioni.codice:prenotazioni for prenotazioni in Prenotazione.query(Prenotazione).\
+            join(Utente, Prenotazione.cf).join(Vaccino,Prenotazione.vaccino).join(Appuntamento,Prenotazione.codice_appuntamento).\
+            join(CentroVaccinale, Appuntamento.id_centroVacc).all()}
 
 

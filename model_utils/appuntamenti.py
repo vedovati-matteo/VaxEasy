@@ -1,3 +1,4 @@
+from model_utils.centriVaccinali import CentroVaccinale
 import jsonpickle
 from app import db
 
@@ -19,7 +20,7 @@ class Appuntamento(db.Model):
     codice = db.Column(db.String(5), unique=True, primary_key=True)
     data = db.Column(db.Date(), nullable=False)
     ora = db.Column(db.Time(), nullable=False)
-    id_centroVacc = db.Column(db.Text(), db.ForeignKey("centroVaccinale.id_centroVacc"), nullable=False)
+    id_centroVacc = db.Column(db.String(5), db.ForeignKey("CentroVaccinale.id_centroVacc"), nullable=False)
 
     def __init__(self, codice, data, ora, id_centroVacc):
         self.codice = codice
@@ -38,8 +39,9 @@ def get_appuntamento_from_json(json):
 
 
 # Recover all appuntamento in the database
-def get_appuntamento():
-    return {appuntamenti.codice:appuntamenti for appuntamenti in Appuntamento.query.all()}
+def get_appuntamentoByProvincia(provincia):
+    return {appuntamenti.codice:appuntamenti for appuntamenti in Appuntamento.query(Appuntamento).\
+            join(CentroVaccinale,Appuntamento.id_centroVacc).filter_by(provincia=provincia).all()}
 
 
 # Recover a appuntamento by its code

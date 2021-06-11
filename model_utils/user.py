@@ -26,6 +26,7 @@ class Utente(db.Model):
     mail = db.Column(db.Text(), nullable=False)
     telefono = db.Column(db.String(10), nullable=False)
     provincia = db.Column(db.Text(), nullable=False)
+    password = db.relationship("Password", backref="user", cascade="all,delete",lazy=False, uselist=False)
 
     def __init__(self, cf, nome, cognome, password, mail, telefono, provincia):
         self.cf = cf
@@ -72,7 +73,7 @@ def get_users():
 
 # Recover a user by its CF
 def get_user_by_cf(cf):
-    return Utente.query.filter_by(cf=cf).first()
+    return Utente.query.filter_by(cf=cf)
 
 
 

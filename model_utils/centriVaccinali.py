@@ -19,7 +19,7 @@ class CentroVaccinale(db.Model):
     id_centroVacc = db.Column(db.String(5), unique=True, primary_key=True)
     indirizzo = db.Column(db.Text(), nullable=False)
     provincia = db.Column(db.Text(), nullable=False)
-    id_ente = db.Column(db.String(4), db.ForeignKey("ente.id_ente"),nullable=False)
+    id_ente = db.Column(db.String(6), db.ForeignKey("ente.id_ente"),nullable=False)
 
     def __init__(self, id_centroVacc, indirizzo, provincia, id_ente):
         self.id_centroVacc = id_centroVacc

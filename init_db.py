@@ -9,17 +9,18 @@ from model_utils.patologieVaccino import PatologiaVaccino, _placeholderPatologia
 from model_utils.prenotazioni import Prenotazione, _placeholderPrenotazione_gen
 from model_utils.vaccinoMalattie import VaccinoMalattia, _placeholderVaccinoMalattia_gen
 from model_utils.vaccini import Vaccino, _placeholderVaccino_gen
+from model_utils.enti import Ente, _placeholderEnte_gen
 
 from controller_utils.password_handler import Password, _gen_placeholder_passwords
 
 db.drop_all()
 db.create_all()
 db.session.commit()
+_placeholderEnte_gen()
 _placeholderUtente_gen()
 _placeholderCentroVaccinale_gen()
 _placeholderVaccino_gen()
 _placeholderAppuntamento_gen()
-
 _placeholderPrenotazione_gen()
 _placeholderPatologia_gen()
 _placeholderPatologiaUtente_gen()
@@ -29,6 +30,7 @@ _placeholderVaccinoMalattia_gen()
 
 _gen_placeholder_passwords()
 users = Utente.query.all()
+enti = Ente.query.all()
 centriVaccinali = CentroVaccinale.query.all()
 appuntamenti = Appuntamento.query.all()
 vaccini = Vaccino.query.all()
