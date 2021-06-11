@@ -45,6 +45,13 @@ def getVaccini(cf):
 def setPrenotazione(cf, codPren, codVaccino):
 	return True
 
+def getPrenotazioni(cf):
+	return (
+		{ "codiceAppuntamento": "BG134","luogo": "fiera", "provincia":"BG", "data": "30/08/2021", "ora":"9.30", "codiceVaccino": "PF347", "nome": "COVID-19", "casaFarmaceutica":"Pfizer", "descrizione": "prova pippo", "richiamo": "1 mese" },
+	)
+
+
+
 # ====> HOME
 @app.route('/')
 def initPage():
@@ -167,6 +174,9 @@ def prenota():
 	else:
 		return redirect(url_for("prenotazione"))
 	
+@app.route('/listaPrenotazioni')
+def listaPrenotazioni():
+	return render_template("prenotazione/listaPrenotazioni.html", prenotazioni=getPrenotazioni(session["user"]["cf"]))
 
 if __name__ == '__main__':
 	app.run(host='127.0.0.1', port=5000, debug=True)
