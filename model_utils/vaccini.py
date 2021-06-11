@@ -5,33 +5,30 @@ from app import db
 # Generate fake database
 def _placeholderVaccino_gen():
     codice1 = ("26248698","36890247","10254976")
-    nome1 = ("Covid19", "MeningococcoB", "Pertosse")
     casaFarmatceutica1 = ("Pfizer", "Moderna", "Moderna")
     richiamo1 = (5, 15, -1)    # mesi dopo il quale è da fare il richiamo (-1 significa che non c'è richiamo)
     descrizione1 = ("Somministrazione singola 1mL", "Somministrazione singola 1.3mL", "Somministrazione singola 0.8mL")
 
-    for codice, nome, casaFarmaceutica, richiamo, descrizione in zip(codice1, nome1, casaFarmatceutica1, richiamo1, descrizione1):
-        db.session.add(Vaccino(codice, nome, casaFarmaceutica, richiamo, descrizione))
+    for codice, casaFarmaceutica, richiamo, descrizione in zip(codice1, casaFarmatceutica1, richiamo1, descrizione1):
+        db.session.add(Vaccino(codice, casaFarmaceutica, richiamo, descrizione))
         db.session.commit()
 
 
 # Class representing vax
 class Vaccino(db.Model):
     codice = db.Column(db.String(8), unique=True, primary_key=True)
-    nome = db.Column(db.Text(), nullable=False)
     casaFarmaceutica = db.Column(db.Text(), nullable=False)
     richiamo = db.Column(db.Integer(), nullable=False)
     descrizione = db.Column(db.Text(), nullable=False)
 
-    def __init__(self, codice, nome, casaFarmaceutica, richiamo, descrizione):
+    def __init__(self, codice, casaFarmaceutica, richiamo, descrizione):
         self.codice = codice
-        self.nome = nome
         self.casaFarmaceutica = casaFarmaceutica
         self.richiamo = richiamo
         self.descrizione = descrizione
 
     def __repr__(self):
-        return "Vaccino-{}: {} - {}".format(self.codice, self.nome, self.casaFarmaceutica, self.richiamo, self.descrizione)
+        return "Vaccino-{}: {} - {}".format(self.codice, self.casaFarmaceutica, self.richiamo, self.descrizione)
 
     def __setstate__(self, state):
         self.__dict__.update(state)
@@ -53,8 +50,8 @@ def get_vax_by_code(codice):
 
 
 # Add a new vax to the database
-def add_vax(new_code, new_nome, new_casaFarmaceutica, new_richiamo, new_descrizione):
-    db.session.add(Vaccino(new_code, new_nome, new_casaFarmaceutica, new_richiamo, new_descrizione))
+def add_vax(new_code, new_casaFarmaceutica, new_richiamo, new_descrizione):
+    db.session.add(Vaccino(new_code, new_casaFarmaceutica, new_richiamo, new_descrizione))
     db.session.commit()
 
 
