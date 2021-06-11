@@ -34,8 +34,8 @@ def get_malattia():
 
 
 # Recover a malattia by its code
-def get_malattia_by_code(nome):
-    return Malattia.query.filter_by(nome=nome).first()
+def get_malattia_by_name(nome):
+    return Malattia.query.filter_by(nome=nome)
 
 
 

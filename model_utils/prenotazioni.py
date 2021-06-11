@@ -37,7 +37,7 @@ class Prenotazione(db.Model):
 
 # recupera tutte le prenotazioni di un utente
 def get_prenotazione_by_cf(cf):
-    return Prenotazione.query.filter_by(cf=cf).first()
+    return Prenotazione.query.filter_by(cf=cf)
 
 
 # Add a new prenotazione to the database
