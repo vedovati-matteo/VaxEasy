@@ -1,15 +1,30 @@
 import jsonpickle
 from app import db
 
+# Generate fake database
+def _placeholderUtente_gen():
+    cf1 = ("RSSMRC21A01A794Y","VRDLCU05A01A794I","BNCLSN66M01F205M","BNTCRL93M41B157N")
+    nome1 = ("Marco", "Luca", "Alessandro", "Carla")
+    cognome1 = ("Rossi", "Verdi", "Bianchi", "Bonetti")
+    email1 = ("marco.rossi@unibg.it", "luca.verdi@unibg.it", "alessandro.bianchi@unibg.it", "carlo.bonetti@unibg.it")
+    telefono1 = ("3270811789", "3364569875", "3394896573", "3452169574")
+    provincia1 = ("Bergamo","Bergamo","Milano","Brescia")
+
+    for cf, nome, cognome, email, telefono, provincia in zip(cf1, nome1, cognome1, email1, telefono1, provincia1):
+        db.session.add(Utente(cf, nome, cognome, email, telefono, provincia))
+        db.session.commit()
+
+
+
 
 # Class representing users
 class Utente(db.Model):
-    cf = db.Column(db.Text(), unique=True, primary_key=True)
+    cf = db.Column(db.String(16), unique=True, primary_key=True)
     nome = db.Column(db.Text(), nullable=False)
     cognome = db.Column(db.Text(), nullable=False)
     password = db.relationship("Password", backref="user", cascade="all,delete",lazy=False, uselist=False)
     mail = db.Column(db.Text(), nullable=False)
-    telefono = db.Column(db.Text(), nullable=False)
+    telefono = db.Column(db.String(10), nullable=False)
     provincia = db.Column(db.Text(), nullable=False)
 
     def __init__(self, cf, nome, cognome, password, mail, telefono, provincia):
@@ -46,7 +61,7 @@ class Utente(db.Model):
 
 
 # Create a User object from its json representation in session["user"]
-def get_user_from_json(json):    # lasciare o togliere?
+def get_user_from_json(json):   
     return jsonpickle.decode(json)
 
 
