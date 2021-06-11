@@ -16,9 +16,9 @@ def _placeholderPrenotazione_gen():
 
 # Class representing prenotazione
 class Prenotazione(db.Model):
-    cf = db.Column(db.String(16), db.ForeignKey("Utente.cf"), primary_key=True)
-    vaccino = db.Column(db.String(8), db.ForeignKey("Vaccino.codice"), primary_key=True)
-    codice_appuntamento = db.Column(db.String(5), db.ForeignKey("Appuntamento.codice"), primary_key=True)
+    cf = db.Column(db.String(16), db.ForeignKey("utente.cf"), primary_key=True)
+    vaccino = db.Column(db.String(8), db.ForeignKey("vaccino.codice"), primary_key=True)
+    codice_appuntamento = db.Column(db.String(5), db.ForeignKey("appuntamento.codice"), primary_key=True)
 
     def __init__(self, cf, vaccino, codice_appuntamento):
         self.cf = cf

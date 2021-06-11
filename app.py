@@ -187,12 +187,10 @@ if __name__ == '__main__':
 
 root = app.root_path
 app.secret_key = "Very Strong Password"
-app.config["UPLOAD_FOLDER"] = os.path.join(root, "uploads")
 app.config["RESIZE_URL"] = "/avatars"
-app.config["RESIZE_ROOT"] = os.path.join(root, "uploads")
 bcrypt = Bcrypt(app)
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////{}/{}'.format(root, "db/vax.db")
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///{}/{}'.format(root, "db/vax.db")
 app.config["SQLALCHEMY_ECHO"] = True
 db = SQLAlchemy(app)
 

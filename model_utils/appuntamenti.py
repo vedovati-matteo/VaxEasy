@@ -4,8 +4,8 @@ from app import db
 # Generate fake database
 def _placeholderAppuntamento_gen():
     codice1 = ("36740","20506","13005","13287")
-    data1 = ("Covid19", "MeningococcoB", "Pertosse")
-    ora1 = ("Somministrazione singola 1mL", "Somministrazione singola 1.3mL", "Somministrazione singola 0.8mL")
+    data1 = ("2021-05-18", "2021-06-08", "2021-06-19", "2021-07-19")
+    ora1 = ("9.30", "10.45", "11.20", "12.30")
     id_centroVacc1 = ("BG160","BS893","MI645","BG160")
 
     for codice, data, ora, id_centroVacc in zip(codice1, data1, ora1, id_centroVacc1):
@@ -19,7 +19,7 @@ class Appuntamento(db.Model):
     codice = db.Column(db.String(5), unique=True, primary_key=True)
     data = db.Column(db.Date(), nullable=False)
     ora = db.Column(db.Time(), nullable=False)
-    id_centroVacc = db.Column(db.Text(), db.ForeignKey("centriVaccinali.id_centroVacc"), nullable=False)
+    id_centroVacc = db.Column(db.Text(), db.ForeignKey("centroVaccinale.id_centroVacc"), nullable=False)
 
     def __init__(self, codice, data, ora, id_centroVacc):
         self.codice = codice

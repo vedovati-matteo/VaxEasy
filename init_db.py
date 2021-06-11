@@ -16,15 +16,16 @@ db.drop_all()
 db.create_all()
 db.session.commit()
 _placeholderUtente_gen()
-_placeholderCentroVaccinale_gen
-_placeholderAppuntamento_gen
-_placeholderVaccino_gen
-_placeholderPrenotazione_gen
-_placeholderPatologia_gen
-_placeholderPatologiaUtente_gen
-_placeholderPatologiaVaccino_gen
-_placeholderMalattia_gen
-_placeholderVaccinoMalattia_gen
+_placeholderCentroVaccinale_gen()
+_placeholderVaccino_gen()
+_placeholderAppuntamento_gen()
+
+_placeholderPrenotazione_gen()
+_placeholderPatologia_gen()
+_placeholderPatologiaUtente_gen()
+_placeholderPatologiaVaccino_gen()
+_placeholderMalattia_gen()
+_placeholderVaccinoMalattia_gen()
 
 _gen_placeholder_passwords()
 users = Utente.query.all()

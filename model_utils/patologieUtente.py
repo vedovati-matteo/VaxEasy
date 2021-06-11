@@ -15,8 +15,8 @@ def _placeholderPatologiaUtente_gen():
 
 # Class representing patologia
 class PatologiaUtente(db.Model):
-    cf = db.Column(db.String(16), db.ForeignKey("Utente.cf"), primary_key=True)
-    patologia = db.Column(db.Text(), db.ForeignKey("Patologia.nome"), primary_key=True)
+    cf = db.Column(db.String(16), db.ForeignKey("utente.cf"), primary_key=True)
+    patologia = db.Column(db.Text(), db.ForeignKey("patologia.nome"), primary_key=True)
 
     def __init__(self, cf, patologia):
         self.cf = cf
