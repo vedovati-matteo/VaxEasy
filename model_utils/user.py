@@ -7,7 +7,7 @@ class Utente(db.Model):
     cf = db.Column(db.Text(), unique=True, primary_key=True)
     nome = db.Column(db.Text(), nullable=False)
     cognome = db.Column(db.Text(), nullable=False)
-    password = db.Column(db.Text(), nullable=False)
+    password = db.relationship("Password", backref="user", cascade="all,delete",lazy=False, uselist=False)
     mail = db.Column(db.Text(), nullable=False)
     telefono = db.Column(db.Text(), nullable=False)
     provincia = db.Column(db.Text(), nullable=False)
@@ -30,6 +30,16 @@ class Utente(db.Model):
     # Method to convert a user in JSON format to store it in session["user"]
     def to_json(self):
         return jsonpickle.encode(self)
+
+    def __setstate__(self, state):
+        self.__dict__.update(state)
+
+    # non vogliamo che nel cookie compaiano le seguente cose
+    def __getstate__(self):
+        state = self.__dict__.copy()
+        del state['password']
+        del state["_sa_instance_state"]  # fa parte di db.model
+        return state
 
     def __setstate__(self, state):
         self.__dict__.update(state)

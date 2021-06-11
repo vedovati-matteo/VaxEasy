@@ -16,7 +16,7 @@ def check_password(userid, candidate):
 
 
 class Password(db.Model):
-    id = db.Column(db.Integer, db.ForeignKey("user.id"), primary_key=True)
+    id = db.Column(db.Integer, db.ForeignKey("user.cf"), primary_key=True)
     hash = db.Column(db.Text(), nullable=False)
 
     def __init__(self, userid, hash):
