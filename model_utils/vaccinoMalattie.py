@@ -15,8 +15,8 @@ def _placeholderVaccinoMalattia_gen():
 
 # Class representing vaccinoMalattia
 class VaccinoMalattia(db.Model):
-    codice_vaccino = db.Column(db.String(8), db.ForeignKey("Vaccino.codice"), primary_key=True)
-    malattia = db.Column(db.Text(), db.ForeignKey("Malattia.nome"), primary_key=True)
+    codice_vaccino = db.Column(db.String(8), db.ForeignKey("vaccino.codice"), primary_key=True)
+    malattia = db.Column(db.Text(), db.ForeignKey("malattia.nome"), primary_key=True)
 
     def __init__(self, codice_vaccino, malattia):
         self.codice_vaccino = codice_vaccino

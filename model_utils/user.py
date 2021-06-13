@@ -21,10 +21,11 @@ def _placeholderUtente_gen():
 
 # Class representing users
 class Utente(db.Model):
+    __tablename__ = "utente"
     cf = db.Column(db.String(16), unique=True, primary_key=True)
     nome = db.Column(db.Text(), nullable=False)
     cognome = db.Column(db.Text(), nullable=False)
-    password = db.relationship("Password", backref="user", cascade="all,delete",lazy=False, uselist=False)
+    password = db.relationship("Password", backref="utente", cascade="all,delete",lazy=False, uselist=False)
     mail = db.Column(db.Text(), nullable=False)
     telefono = db.Column(db.String(10), nullable=False)
     provincia = db.Column(db.Text(), nullable=False)

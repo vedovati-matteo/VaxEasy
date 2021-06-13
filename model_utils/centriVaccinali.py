@@ -5,7 +5,7 @@ from app import db
 def _placeholderCentroVaccinale_gen():
     id_centroVacc1 = ("BG160","BS893","MI645")
     indirizzo1 = ("Covid19", "MeningococcoB", "Pertosse")
-    provincia1 = ("Somministrazione singola 1mL", "Somministrazione singola 1.3mL", "Somministrazione singola 0.8mL")
+    provincia1 = ("Bergamo", "Brescia", "Milano")
     id_ente1 = ("REG156","PROV3546","REG987")
 
     for id_centroVacc, indirizzo, provincia, id_ente in zip(id_centroVacc1, indirizzo1, provincia1, id_ente1):
@@ -16,6 +16,7 @@ def _placeholderCentroVaccinale_gen():
 
 # Class representing centroVaccinale
 class CentroVaccinale(db.Model):
+    __tablename__ = "centroVaccinale"
     id_centroVacc = db.Column(db.String(5), unique=True, primary_key=True)
     indirizzo = db.Column(db.Text(), nullable=False)
     provincia = db.Column(db.Text(), nullable=False)

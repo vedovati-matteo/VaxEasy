@@ -1,6 +1,5 @@
 from model_utils.patologieVaccino import PatologiaVaccino
 from model_utils.patologieUtente import PatologiaUtente
-from model_utils.prenotazioni import Prenotazione
 from model_utils.user import Utente
 import jsonpickle
 from app import db
@@ -21,6 +20,7 @@ def _placeholderVaccino_gen():
 
 # Class representing vax
 class Vaccino(db.Model):
+    __tablename__ = "vaccino"
     codice = db.Column(db.String(8), unique=True, primary_key=True)
     nome = db.Column(db.Text(), nullable=False)
     casaFarmaceutica = db.Column(db.Text(), nullable=False)

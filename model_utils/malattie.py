@@ -5,7 +5,7 @@ from app import db
 def _placeholderMalattia_gen():
     nome1 = ("Covid19", "MeningococcoB", "Pertosse")
 
-    for nome, descrizione in zip(nome1):
+    for nome in zip(nome1):
         db.session.add(Malattia(nome))
         db.session.commit()
 
@@ -13,6 +13,7 @@ def _placeholderMalattia_gen():
 
 # Class representing malattia
 class Malattia(db.Model):
+    __tablename__ = "malattia"
     nome = db.Column(db.Text(), unique=True, primary_key=True)
 
     def __init__(self, nome):
