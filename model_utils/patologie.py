@@ -33,7 +33,7 @@ def get_patologia_from_json(json):
 
 # Recover all patologia in the database
 def get_patologia():
-    return  Patologia.query.select(Patologia.nome)
+    return  Patologia.query(Patologia.nome).all()
 
 
 # Recover a patologia by its code

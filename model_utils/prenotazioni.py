@@ -53,8 +53,8 @@ def setPrenotazione(cf, codPren, codVaccino):
     return (Prenotazione.query.filter_by(cf=cf, codVaccino=codVaccino, codPren=codPren) != None)
 
 def getPrenotazioni(cf):   # appuntamento, centro vaccinale e vaccino
-     return {prenotazioni.codice:prenotazioni for prenotazioni in Prenotazione.query(Prenotazione).\
+     return {prenotazioni.codice:prenotazioni for prenotazioni in Prenotazione.query.\
             join(Utente, Prenotazione.cf).join(Vaccino,Prenotazione.vaccino).join(Appuntamento,Prenotazione.codice_appuntamento).\
-            join(CentroVaccinale, Appuntamento.id_centroVacc).all()}
+            join(CentroVaccinale, Appuntamento.id_centroVacc).filter_by(cf=cf).all()}
 
 

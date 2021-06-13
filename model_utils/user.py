@@ -76,7 +76,7 @@ def get_users():
 # Recover a user by its CF with patologie
 def get_user_by_cf(cf1):
     patologie = {Patologia.nome:nome for nome in Patologia.query.select(Patologia.nome)}
-    for pat in Utente.query(PatologiaUtente).join(Utente,PatologiaUtente.cf).filter_by(cf=cf1).select(Patologia.nome):
+    for pat in Utente.query(Patologia.nome).join(Utente,PatologiaUtente.cf).filter_by(cf=cf1):
         if(PatologiaUtente.query.filter_by(cf = cf1)!=None):
             patologie[pat.nome] = True
         else:
