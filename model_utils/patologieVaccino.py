@@ -5,7 +5,7 @@ from app import db
 # Generate fake database
 def _placeholderPatologiaVaccino_gen():
     codice_vaccino1 = ("26248698","36890247","36890247","10254976")
-    patologia1 = ("Diabete", "Ipertensione", "Diabete", "Diabete")
+    patologia1 = ("Diabete", "Ipertensione", "Diabete", "Glicemia")
 
     for codice_vaccino, patologia in zip(codice_vaccino1, patologia1):
         db.session.add(PatologiaVaccino(codice_vaccino, patologia))

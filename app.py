@@ -11,7 +11,7 @@ app.secret_key = "super secret key"
 
 # ______funz da fare
 
-def getUserByCf(cf): # ritorna i campi dato il cf   -> user.py get_user_by_cf()
+def getUserByCf(cf): # ritorna i campi dato il cf   -> FUNZIONA user.py get_user_by_cf() (torno lista sennò dizionario crea problemi)
 	patologie = {}
 	for a in getPatologie():
 		patologie[a] = False
@@ -30,13 +30,13 @@ def getUserByCf(cf): # ritorna i campi dato il cf   -> user.py get_user_by_cf()
 def checkPassword(cf, pw): # controlla la password (con hash)   -> password_handler.py - check_password()
 	return True
 
-def getPatologie (): # ritorna la lista di patologie (solo nome) -> patologie.py - get_patologia()
+def getPatologie (): # ritorna la lista di patologie (solo nome) -> FUNZIONA patologie.py - get_patologia()
 	return ('Prova1', 'Pippo', 'foo')
 
 def createUser(campi): # crea un user con i campi specificati e ritorna True se è avvenuto con successo, altrimenti False  -> user.py - add_user()
 	return True
 
-def getAppuntamenti (provincia): # ritorna tutti gli appuntamenti disponibili per una provincia  -> appuntamenti.py - get_appuntamentoByProvincia()
+def getAppuntamenti (provincia): # ritorna tutti gli appuntamenti disponibili per una provincia  -> FUNZIONA appuntamenti.py - get_appuntamentoByProvincia()
 	return (
 		{ "codice": "BG123","luogo": "fiera", "provincia":"BG", "data": "17/08/2021", "ora":"17.30" },
 		{ "codice": "BG134","luogo": "fiera", "provincia":"BG", "data": "30/08/2021", "ora":"9.30" },
@@ -44,7 +44,7 @@ def getAppuntamenti (provincia): # ritorna tutti gli appuntamenti disponibili pe
 		{ "codice": "BG401","luogo": "trescore", "provincia":"BG", "data": "06/09/2021", "ora":"12.00" }
 	)
 
-def getAppuntamento(codice): # ritorna il singolo appuntamento dato il codice   -> appuntamenti.py - get_appuntamento_by_code()
+def getAppuntamento(codice): # ritorna il singolo appuntamento dato il codice   -> FUNZIONA appuntamenti.py - get_appuntamento_by_code()
 	appuntamenti = (
 		{ "codice": "BG123","luogo": "fiera", "provincia":"BG", "data": "17/08/2021", "ora":"17.30" },
 		{ "codice": "BG134","luogo": "fiera", "provincia":"BG", "data": "30/08/2021", "ora":"9.30" },
@@ -58,7 +58,7 @@ def getAppuntamento(codice): # ritorna il singolo appuntamento dato il codice   
 		return None
 
 def getVaccini(cf): # ritorna tutti i vaccini possibili per l'utente dato il codice fiscale
-	# controllo cf    -> vaccini.py - getVaccini()
+	# controllo cf    -> FUNZIONA vaccini.py - getVaccini()
 	return (
 		{ "codice": "CZ234", "nome": "COVID-19", "casaFarmaceutica":"Moderna", "descrizione": "prova prova", "richiamo": "1 mese"},
 		{ "codice": "PF347", "nome": "COVID-19", "casaFarmaceutica":"Pfizer", "descrizione": "prova pippo", "richiamo": "1 mese"},
@@ -67,9 +67,9 @@ def getVaccini(cf): # ritorna tutti i vaccini possibili per l'utente dato il cod
 	)
 
 def setPrenotazione(cf, codPren, codVaccino): # dato il codice fiscale, codice della prenotazione e codice del vaccino crea una prenotazione, ritorna True se avvenuta altrimenti False
-	return True    # -> prenotazioni.py - setPrenotazione()
+	return True    # -> FUNZIONA prenotazioni.py - setPrenotazione()
 
-def getPrenotazioni(cf): # ritorna le prenotazione dell'utente dato codice fiscale   -> prenotazione.py - getPrenotazioni()	
+def getPrenotazioni(cf): # ritorna le prenotazione dell'utente dato codice fiscale   -> FUNZIONA prenotazione.py - getPrenotazioni()	
 	return (
 		{ "codiceAppuntamento": "BG134","luogo": "fiera", "provincia":"BG", "data": "30/08/2021", "ora":"9.30", "codiceVaccino": "PF347", "nome": "COVID-19", "casaFarmaceutica":"Pfizer", "descrizione": "prova pippo", "richiamo": "1 mese" },
 	)

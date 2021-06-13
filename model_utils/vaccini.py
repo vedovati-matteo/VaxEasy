@@ -35,7 +35,7 @@ class Vaccino(db.Model):
         self.descrizione = descrizione
 
     def __repr__(self):
-        return "Vaccino-{}: {} - {} - {} - {}".format(self.codice, self.nome, self.casaFarmaceutica, self.richiamo, self.descrizione)
+        return "{} - {} - {} - {} - {}".format(self.codice, self.nome, self.casaFarmaceutica, self.richiamo, self.descrizione)
 
     def __setstate__(self, state):
         self.__dict__.update(state)
@@ -52,7 +52,7 @@ def get_vax():
 
 # Recover a vax by its code
 def get_vax_by_code(codice):
-    return Vaccino.query.filter_by(codice=codice)
+    return {vaccino.codice:vaccino for vaccino in Vaccino.query.filter_by(codice=codice).all()}
 
 
 
@@ -63,20 +63,38 @@ def add_vax(new_code, new_name, new_casaFarmaceutica, new_richiamo, new_descrizi
 
 def getVaccini(cf):   # ritorna tutti i vaccini possibili per l'utente dato il codice fiscale
     vaccini_tot = {vaccini.codice:vaccini for vaccini in Vaccino.query.all()}
-    patologie = []
+    patologie = []   #tutte le patologie dell'utente
     for pat in PatologiaUtente.query.filter_by(cf=cf).all():
         patologie.append(pat.patologia)
 
-    for vacc in PatologiaVaccino.query.join(Vaccino).all():
-        if vacc.patologia not in patologie:
-            vaccini_tot[vacc.codice_vaccino] = True
-        else:
-            vaccini_tot[vacc.codice_vaccino] = False
+    print("=======patologie utente=======")
+    print(patologie)
+
+    noVax = []
+    for vacc in PatologiaVaccino.query.all():
+        for i in range(len(patologie)):
+            if vacc.patologia == patologie[i]:
+                flag = True
+                break
+        if flag == True:
+            noVax.append(vacc.codice_vaccino)
+        flag = False
+
+    vaccU = []
     
-    vaccU = {}
-    for tmp in vaccini_tot:    #corretto?
-        if vaccini_tot[tmp.codice_vaccino] == True:
-            vaccU[tmp] = Vaccino.query.filter_by(codice_vaccino=tmp.codice_vaccino).all()
+    print("=======lista vaccini da non fare=======")
+    print(noVax)
+
+    for tmp in vaccini_tot: 
+        flag = False
+        c = 0
+        for i in range(len(noVax)):
+            if noVax[i] in tmp:
+                flag = True
+                c = i
+                break
+        if flag == False:
+            vaccU.append(get_vax_by_code(tmp))
 
     return vaccU
 

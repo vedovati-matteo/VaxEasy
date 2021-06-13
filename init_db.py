@@ -76,11 +76,11 @@ for u in vacciniMalattie:
     print(u)
 
 print("=======")
-#print(get_user_by_cf("RSSMRC21A01A794Y"))
+print(get_user_by_cf("RSSMRC21A01A794Y"))  # OK
 print("=======")
 print(get_patologia())   #ok
 print("=======")
-add_user("RSSLSN21A01A794Y", "Alessandro", "Rossi", "alessandro.rossi@unibg.it", "3270810777", "Bergamo")
+add_user("RSSLSN21A01A794Y", "Alessandro", "Rossi", "alessandro.rossi@unibg.it", "3270810777", "Bergamo")    # ok
 print("======= PRINT DI USER========")
 for u in users:
     print(u)
@@ -88,8 +88,8 @@ print("=======")
 print(get_appuntamentoByProvincia("Bergamo"))   # ok
 print("=======")
 print(get_appuntamento_by_code("36740"))  # ok
-print("=======")
-#print(getVaccini("RSSMRC21A01A794Y"))
+print("=== getVaccini====") 
+print(getVaccini("RSSMRC21A01A794Y"))  # ok
 print("=======")
 print(setPrenotazione("RSSMRC21A01A794Y", "26248698", "36740"))   # ok
 print("=======")
