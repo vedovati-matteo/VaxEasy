@@ -11,7 +11,7 @@ app.secret_key = "super secret key"
 
 # ______funz da fare
 
-def getUserByCf(cf): # ritorna i campi dato il cf
+def getUserByCf(cf): # ritorna i campi dato il cf   -> user.py get_user_by_cf()
 	patologie = {}
 	for a in getPatologie():
 		patologie[a] = False
@@ -188,6 +188,7 @@ db = SQLAlchemy(app)
 
 if __name__ == '__main__':
 	app.run(host='127.0.0.1', port=5000, debug=True)
+	
 
 
 

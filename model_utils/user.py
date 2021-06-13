@@ -25,10 +25,10 @@ class Utente(db.Model):
     cf = db.Column(db.String(16), unique=True, primary_key=True)
     nome = db.Column(db.Text(), nullable=False)
     cognome = db.Column(db.Text(), nullable=False)
-    password = db.relationship("Password", backref="utente", cascade="all,delete",lazy=False, uselist=False)
     mail = db.Column(db.Text(), nullable=False)
     telefono = db.Column(db.String(10), nullable=False)
-    provincia = db.Column(db.Text(), nullable=False)
+    provincia = db.Column(db.Text(), nullable=False)    
+    password = db.relationship("Password", backref="utente", cascade="all,delete",lazy=False, uselist=False)
 
     def __init__(self, cf, nome, cognome, mail, telefono, provincia):
         self.cf = cf
@@ -39,7 +39,7 @@ class Utente(db.Model):
         self.provincia = provincia
 
     def __repr__(self):
-        return "Utente-{}: {} - {} - {} - {}".format(self.cf, self.get_full_name(), self.mail, self.telefono, self.provincia)
+        return "Utente-{}: {} - {} - {} - {} - {}".format(self.cf, self.get_full_name(), self.mail, self.telefono, self.provincia, self.password)
 
     # Method to get the user full name
     def get_full_name(self):
@@ -59,9 +59,6 @@ class Utente(db.Model):
         del state["_sa_instance_state"]  # fa parte di db.model
         return state
 
-    def __setstate__(self, state):
-        self.__dict__.update(state)
-
 
 # Create a User object from its json representation in session["user"]
 def get_user_from_json(json):   
@@ -75,7 +72,12 @@ def get_users():
 
 # Recover a user by its CF with patologie
 def get_user_by_cf(cf1):
-    patologie = {Patologia.nome:nome for nome in Patologia.query.select(Patologia.nome)}
+
+    """patologie = {}
+    for patologia in Patologia.query.all():
+        patologie(patologia) = patologia.nome"""
+
+    patologie = {patologia.nome:patologia for patologia in Patologia.query.all()}
     for pat in Utente.query(Patologia.nome).join(Utente,PatologiaUtente.cf).filter_by(cf=cf1):
         if(PatologiaUtente.query.filter_by(cf = cf1)!=None):
             patologie[pat.nome] = True
@@ -87,8 +89,9 @@ def get_user_by_cf(cf1):
 
 
 # Add a new user to the database
-def add_user(new_cf, new_nome, new_cognome, new_email, new_cell, new_prov):
-    db.session.add(Utente(new_cf, new_nome, new_cognome, new_email, new_cell, new_prov))
-    db.session.commit()
+def add_user(cf1, nome1, cognome1, email1, telefono1, provincia1):
+    for cf, nome, cognome, email, telefono, provincia in zip(cf1, nome1, cognome1, email1, telefono1, provincia1):
+        db.session.add(Utente(cf, nome, cognome, email, telefono, provincia))
+        db.session.commit()
 
 

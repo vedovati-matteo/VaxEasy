@@ -30,7 +30,7 @@ class Prenotazione(db.Model):
         self.codice_appuntamento = codice_appuntamento
 
     def __repr__(self):
-        return "Prenotazione-{}: {} - {}".format(self.cf, self.vaccino, self.codice_appuntamento)
+        return "{} - {} - {}".format(self.cf, self.vaccino, self.codice_appuntamento)
 
     def to_json(self): 
         return jsonpickle.encode(self)
@@ -50,11 +50,9 @@ def add_prenotazione(new_cf, new_vaccino, new_codice_appuntamento):
     db.session.commit()
 
 def setPrenotazione(cf, codPren, codVaccino):
-    return (Prenotazione.query.filter_by(cf=cf, codVaccino=codVaccino, codPren=codPren) != None)
+    return (Prenotazione.query.filter_by(cf=cf, vaccino=codVaccino, codice_appuntamento=codPren).all() != None)
 
 def getPrenotazioni(cf):   # appuntamento, centro vaccinale e vaccino
-     return {prenotazioni.codice:prenotazioni for prenotazioni in Prenotazione.query.\
-            join(Utente, Prenotazione.cf).join(Vaccino,Prenotazione.vaccino).join(Appuntamento,Prenotazione.codice_appuntamento).\
-            join(CentroVaccinale, Appuntamento.id_centroVacc).filter_by(cf=cf).all()}
+    return {user.cf:user for user in Prenotazione.query.join(Utente).filter_by(cf=cf).join(Vaccino).join(Appuntamento).join(CentroVaccinale).all()}
 
 

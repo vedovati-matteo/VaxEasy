@@ -31,7 +31,7 @@ class Appuntamento(db.Model):
         self.id_centroVacc = id_centroVacc
 
     def __repr__(self):
-        return "Appuntamento-{}: {} - {} - {}".format(self.codice, self.data, self.ora, self.id_centroVacc)
+        return "{} - {} - {} - {}".format(self.codice, self.data, self.ora, self.id_centroVacc)
 
     def __setstate__(self, state):
         self.__dict__.update(state)
@@ -42,13 +42,12 @@ def get_appuntamento_from_json(json):
 
 # Recover all appuntamento in the database
 def get_appuntamentoByProvincia(provincia):
-    return {appuntamenti.codice:appuntamenti for appuntamenti in Appuntamento.query(Appuntamento).\
-            join(CentroVaccinale,Appuntamento.id_centroVacc).filter_by(provincia=provincia).all()}
+    return {appuntamenti.codice:appuntamenti for appuntamenti in Appuntamento.query.join(CentroVaccinale).filter_by(provincia=provincia).all()}
 
 
 # Recover a appuntamento by its code
-def get_appuntamento_by_code(codice):
-    return Appuntamento.query.filter_by(codice=codice)
+def get_appuntamento_by_code(code):
+    return {appuntamenti.codice:appuntamenti for appuntamenti in Appuntamento.query.filter_by(codice=code).all()}
 
 
 

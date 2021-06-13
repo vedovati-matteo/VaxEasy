@@ -63,17 +63,20 @@ def add_vax(new_code, new_name, new_casaFarmaceutica, new_richiamo, new_descrizi
 
 def getVaccini(cf):   # ritorna tutti i vaccini possibili per l'utente dato il codice fiscale
     vaccini_tot = {vaccini.codice:vaccini for vaccini in Vaccino.query.all()}
-    patologie = {cf:pat for pat in PatologiaUtente.query(PatologiaUtente.patologia).join(Utente, PatologiaUtente.cf).filter_by(cf=cf)}
-    for vacc in PatologiaVaccino.query.join(Vaccino, PatologiaVaccino.codice_vaccino).all():
+    patologie = []
+    for pat in PatologiaUtente.query.filter_by(cf=cf).all():
+        patologie.append(pat.patologia)
+
+    for vacc in PatologiaVaccino.query.join(Vaccino).all():
         if vacc.patologia not in patologie:
-            vaccini_tot = True
+            vaccini_tot[vacc.codice_vaccino] = True
         else:
-            vaccini_tot = False
+            vaccini_tot[vacc.codice_vaccino] = False
     
     vaccU = {}
     for tmp in vaccini_tot:    #corretto?
-        if vaccini_tot[tmp] == True:
-            vaccU[tmp] = Vaccino.query.filter_by(codice=tmp).all()
+        if vaccini_tot[tmp.codice_vaccino] == True:
+            vaccU[tmp] = Vaccino.query.filter_by(codice_vaccino=tmp.codice_vaccino).all()
 
     return vaccU
 
