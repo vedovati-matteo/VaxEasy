@@ -4,9 +4,10 @@ from app import db
 # Generate fake database
 def _placeholderMalattia_gen():
     nome1 = ("Covid19", "MeningococcoB", "Pertosse")
+    descr1 = ("Alta contagiosità" , "Media contagiosità" , "Bassa contagiosità")
 
-    for nome in zip(nome1):
-        db.session.add(Malattia(nome))
+    for nome, descr in zip(nome1, descr1):
+        db.session.add(Malattia(nome,descr))
         db.session.commit()
 
 
@@ -15,12 +16,14 @@ def _placeholderMalattia_gen():
 class Malattia(db.Model):
     __tablename__ = "malattia"
     nome = db.Column(db.Text(), unique=True, primary_key=True)
+    descr = db.Column(db.Text(), nullable=False)
 
-    def __init__(self, nome):
+    def __init__(self, nome, descr):
         self.nome = nome
+        self.descr = descr
 
     def __repr__(self):
-        return "Malattia-{}: {} - {}".format(self.nome)
+        return "Malattia-{}: {}".format(self.nome, self.descr)
 
     def __setstate__(self, state):
         self.__dict__.update(state)
@@ -41,8 +44,8 @@ def get_malattia_by_name(nome):
 
 
 # Add a new malattia to the database
-def add_malattia(new_nome):
-    db.session.add(Malattia(new_nome))
+def add_malattia(new_nome, new_descr):
+    db.session.add(Malattia(new_nome, new_descr))
     db.session.commit()
 
 

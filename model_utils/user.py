@@ -39,7 +39,7 @@ class Utente(db.Model):
         self.provincia = provincia
 
     def __repr__(self):
-        return "Utente-{}: {} - {}".format(self.cf, self.get_full_name(), self.password)
+        return "Utente-{}: {} - {} - {} - {}".format(self.cf, self.get_full_name(), self.mail, self.telefono, self.provincia)
 
     # Method to get the user full name
     def get_full_name(self):

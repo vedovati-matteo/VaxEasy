@@ -176,13 +176,6 @@ def prenota():
 def listaPrenotazioni():
 	return render_template("prenotazione/listaPrenotazioni.html", prenotazioni=getPrenotazioni(session["user"]["cf"]))
 
-if __name__ == '__main__':
-	app.run(host='127.0.0.1', port=5000, debug=True)
-
-
-
-
-
 root = app.root_path
 app.secret_key = "Very Strong Password"
 app.config["RESIZE_URL"] = "/avatars"
@@ -191,5 +184,14 @@ bcrypt = Bcrypt(app)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///{}/{}'.format(root, "db/vax.db")
 app.config["SQLALCHEMY_ECHO"] = True
 db = SQLAlchemy(app)
+
+
+if __name__ == '__main__':
+	app.run(host='127.0.0.1', port=5000, debug=True)
+
+
+
+
+
 
 

@@ -31,7 +31,7 @@ class Appuntamento(db.Model):
         self.id_centroVacc = id_centroVacc
 
     def __repr__(self):
-        return "Appuntamento-{}: {} - {}".format(self.codice, self.data, self.ora, self.id_centroVacc)
+        return "Appuntamento-{}: {} - {} - {}".format(self.codice, self.data, self.ora, self.id_centroVacc)
 
     def __setstate__(self, state):
         self.__dict__.update(state)

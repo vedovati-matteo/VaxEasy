@@ -52,7 +52,7 @@ for u in centriVaccinali:
     print(u)
 print("=======")
 for u in appuntamenti:
-    print(u)
+   print(u)
 print("=======")
 for u in vaccini:
     print(u)

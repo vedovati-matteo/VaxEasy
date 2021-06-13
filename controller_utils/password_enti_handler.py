@@ -11,7 +11,7 @@ def _gen_placeholder_passwordsEnte():
 
 
 # Check that the candidate password for the given userid is correct
-def check_password(id_ente, candidate):
+def check_passwordEnte(id_ente, candidate):
     return bcrypt.check_password_hash(PasswordE.query.filter_by(id=id_ente).first().hash, candidate)
 
 

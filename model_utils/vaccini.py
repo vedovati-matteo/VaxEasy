@@ -35,7 +35,7 @@ class Vaccino(db.Model):
         self.descrizione = descrizione
 
     def __repr__(self):
-        return "Vaccino-{}: {} - {}".format(self.codice, self.nome, self.casaFarmaceutica, self.richiamo, self.descrizione)
+        return "Vaccino-{}: {} - {} - {} - {}".format(self.codice, self.nome, self.casaFarmaceutica, self.richiamo, self.descrizione)
 
     def __setstate__(self, state):
         self.__dict__.update(state)

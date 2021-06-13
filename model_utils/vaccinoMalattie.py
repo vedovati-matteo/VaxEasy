@@ -15,6 +15,7 @@ def _placeholderVaccinoMalattia_gen():
 
 # Class representing vaccinoMalattia
 class VaccinoMalattia(db.Model):
+    __tablename__ = "vaccinoMalattia"
     codice_vaccino = db.Column(db.String(8), db.ForeignKey("vaccino.codice"), primary_key=True)
     malattia = db.Column(db.Text(), db.ForeignKey("malattia.nome"), primary_key=True)
 
@@ -23,7 +24,7 @@ class VaccinoMalattia(db.Model):
         self.malattia = malattia
 
     def __repr__(self):
-        return "VaccinoMalattia-{}: {} - {}".format(self.codice_vaccino, self.malattia)
+        return "VaccinoMalattia-{}: {}".format(self.codice_vaccino, self.malattia)
 
     def to_json(self): 
         return jsonpickle.encode(self)

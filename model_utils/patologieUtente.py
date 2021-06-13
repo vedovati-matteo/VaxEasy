@@ -23,7 +23,7 @@ class PatologiaUtente(db.Model):
         self.patologia = patologia
 
     def __repr__(self):
-        return "PatologiaUtente-{}: {} - {}".format(self.cf, self.patologia)
+        return "PatologiaUtente-{}: {}".format(self.cf, self.patologia)
 
     def to_json(self): 
         return jsonpickle.encode(self)

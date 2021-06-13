@@ -23,7 +23,7 @@ class PatologiaVaccino(db.Model):
         self.patologia = patologia
 
     def __repr__(self):
-        return "PatologiaVaccino-{}: {} - {}".format(self.codice_vaccino, self.patologia)
+        return "PatologiaVaccino-{}: {}".format(self.codice_vaccino, self.patologia)
 
     def to_json(self): 
         return jsonpickle.encode(self)
