@@ -15,7 +15,8 @@ def _placeholderEnte_gen():
 # Class representing vax
 class Ente(db.Model):
     id_ente = db.Column(db.String(6), unique=True, primary_key=True)
-    descrizione = db.Column(db.Text(), nullable=False)
+    descrizione = db.Column(db.Text(), nullable=False)    
+    password = db.relationship("PasswordE", backref="user", cascade="all,delete",lazy=False, uselist=False)
 
     def __init__(self, id_ente, descrizione):
         self.id_ente = id_ente
@@ -26,6 +27,13 @@ class Ente(db.Model):
 
     def __setstate__(self, state):
         self.__dict__.update(state)
+
+    # non vogliamo che nel cookie compaiano le seguente cose
+    def __getstate__(self):
+        state = self.__dict__.copy()
+        del state['password']
+        del state["_sa_instance_state"]  # fa parte di db.model
+        return state
 
 
 def get_ente_from_json(json):    

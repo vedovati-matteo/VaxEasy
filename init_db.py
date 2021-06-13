@@ -12,6 +12,7 @@ from model_utils.vaccini import Vaccino, _placeholderVaccino_gen
 from model_utils.enti import Ente, _placeholderEnte_gen
 
 from controller_utils.password_handler import Password, _gen_placeholder_passwords
+from controller_utils.password_enti_handler import Password, _gen_placeholder_passwordsEnte
 
 db.drop_all()
 db.create_all()
@@ -28,6 +29,7 @@ _placeholderPatologiaVaccino_gen()
 _placeholderMalattia_gen()
 _placeholderVaccinoMalattia_gen()
 _gen_placeholder_passwords()
+_gen_placeholder_passwordsEnte()
 users = Utente.query.all()
 enti = Ente.query.all()
 centriVaccinali = CentroVaccinale.query.all()

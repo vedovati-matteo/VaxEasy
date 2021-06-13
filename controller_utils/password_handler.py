@@ -4,7 +4,7 @@ from app import db
 
 # Generate fake database
 def _gen_placeholder_passwords():
-    for userid, passwd in zip(range(0, 4), ["secret", "my_pass", "tmp_pass", "bdweb2021"]):
+    for userid, passwd in zip(range(0, 5), ["passw1", "my_pass", "tmp_pass", "bdweb2021","vax_pass"]):
         gen = bcrypt.generate_password_hash(passwd)
         db.session.add(Password(userid, gen.decode("ascii")))
         db.session.commit()
