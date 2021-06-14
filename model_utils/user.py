@@ -99,7 +99,12 @@ def get_user_by_cf(cf1):
 
 
 # Add a new user to the database
-def add_user(cf, nome, cognome, email, telefono, provincia,password):
+def add_user(cf, nome, cognome, email, telefono, provincia,password, patologie):
+
+    for i in range(len(patologie)):
+        db.session.add(PatologiaUtente(cf, patologie[i]))
+
+
     gen = bcrypt.generate_password_hash(password)
     db.session.add(Utente(cf, nome, cognome, email, telefono, provincia, gen.decode("ascii")))
     db.session.commit()

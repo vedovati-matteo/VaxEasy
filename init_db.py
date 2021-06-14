@@ -86,6 +86,8 @@ print(setPrenotazione("RSSMRC21A01A794Y", "26248698", "36740"))   # ok
 print("=======")
 print(getPrenotazioni("RSSMRC21A01A794Y"))   # ok 
 print("===cheeec====")
-print(check_password("RSSLSN21A01A794Y","ciOA"))   # ok 
+a = get_user_by_cf("RSSMRC21A01A794Y")   
+b = a[0][0]
+print(a[1])
 
 
