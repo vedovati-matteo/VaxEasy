@@ -112,10 +112,17 @@ def landLogin():
 
 	if len(campi[0]) > 0:
 		# check password
-		par = Utente.__repr__(campi[0])
-		if check_password(campi[0][0], request.form.get("pw")):
-	
-			session["user"] = campi
+		if check_password(campi[0][0].cf, request.form.get("pw")):
+			par = {
+				"cf": campi[0][0].cf,
+				"nome": campi[0][0].nome,
+				"cognome": campi[0][0].cognome,
+				"provincia": campi[0][0].provincia,
+				"tel": campi[0][0].telefono,
+				"email": campi[0][0].mail,
+				"patologie": campi[1]
+			}
+			session["user"] = par
 			return redirect(url_for("home"))
 	
 	return redirect(url_for("login"))
@@ -143,11 +150,22 @@ def landSignin():
 		"patologie": patologie
 	}
 
+	add_user(
+		"cf": request.form.get("cf"),
+		"nome": request.form.get("nome"),
+		"cognome": request.form.get("cognome"),
+		"email": request.form.get("email"),
+		"tel": request.form.get("tel"),
+		"provincia": request.form.get("provincia"),
+		"tel": request.form.get("pw")
+	)
+
+	"""
 	if createUser(campi):
 		return redirect(url_for("login"))
 	else:
 		return redirect(url_for("signin"))
-
+	"""
 
 # ====> PROFILO
 @app.route('/profilo')
@@ -195,7 +213,7 @@ def listaPrenotazioni():
 
 if __name__ == '__main__':
 	from model_utils.patologie import get_patologia
-	from model_utils.user import get_user_by_cf, check_password, Utente
+	from model_utils.user import get_user_by_cf, check_password, add_user
 	app.run(host='127.0.0.1', port=5000, debug=True)
 	
 
