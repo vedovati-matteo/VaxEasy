@@ -66,7 +66,7 @@ class Utente(db.Model):
 
 # Check that the candidate password for the given userid is correct
 def check_password(userid, candidate):
-    return bcrypt.check_password_hash(Utente.query(Utente.password).filter_by(id=userid).first().hash, candidate)
+    return bcrypt.check_password_hash(Utente.query.filter_by(cf=userid).first().password, candidate)
 
 # Create a User object from its json representation in session["user"]
 def get_user_from_json(json):   
