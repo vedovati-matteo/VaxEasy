@@ -160,7 +160,7 @@ def landSignin():
 		request.form.get("pw"),
 		patologie
 	)
-
+	return redirect(url_for("login"))	
 	"""
 	if createUser(campi):
 		return redirect(url_for("login"))
