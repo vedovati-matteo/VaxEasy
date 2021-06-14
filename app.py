@@ -184,7 +184,8 @@ def logout():
 # ====> PRENOTAZIONE
 @app.route('/listaAppuntamenti')
 def listaAppuntamenti():
-
+	print("=============Z")
+	print(get_appuntamentoByProvincia("Bergamo"))
 	return render_template("prenotazione/listaAppuntamenti.html", appuntamenti=getAppuntamenti(session["user"]["provincia"]))
 
 @app.route('/prenotazione', methods=["GET"])
@@ -215,6 +216,7 @@ def listaPrenotazioni():
 if __name__ == '__main__':
 	from model_utils.patologie import get_patologia
 	from model_utils.user import get_user_by_cf, check_password, add_user
+	from model_utils.appuntamenti import get_appuntamentoByProvincia
 	app.run(host='127.0.0.1', port=5000, debug=True)
 	
 
