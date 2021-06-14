@@ -10,13 +10,12 @@ def _gen_placeholder_passwords():
         db.session.commit()
 
 
-# Check that the candidate password for the given userid is correct
-def check_password(userid, candidate):
-    return bcrypt.check_password_hash(Password.query.filter_by(id=userid).first().hash, candidate)
+
 
 
 class Password(db.Model):
-    id = db.Column(db.Integer, db.ForeignKey("utente.cf"), primary_key=True)
+    __tablename__ = "password"
+    id = db.Column(db.String(16), db.ForeignKey("utente.cf"), primary_key=True)
     hash = db.Column(db.Text(), nullable=False)
 
     def __init__(self, userid, hash):

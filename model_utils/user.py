@@ -1,6 +1,8 @@
+from controller_utils.password_handler import Password
 from model_utils.patologie import Patologia
 from model_utils.patologieUtente import PatologiaUtente
 import jsonpickle
+from app import bcrypt
 from app import db
 
 # Generate fake database
@@ -11,9 +13,11 @@ def _placeholderUtente_gen():
     email1 = ("marco.rossi@unibg.it", "luca.verdi@unibg.it", "alessandro.bianchi@unibg.it", "carlo.bonetti@unibg.it")
     telefono1 = ("3270811789", "3364569875", "3394896573", "3452169574")
     provincia1 = ("Bergamo","Bergamo","Milano","Brescia")
+    passwd1 = ("passw1", "my_pass", "tmp_pass", "bdweb2021","vax_pass")
 
-    for cf, nome, cognome, email, telefono, provincia in zip(cf1, nome1, cognome1, email1, telefono1, provincia1):
-        db.session.add(Utente(cf, nome, cognome, email, telefono, provincia))
+    for cf, nome, cognome, email, telefono, provincia, passwd in zip(cf1, nome1, cognome1, email1, telefono1, provincia1, passwd1):
+        gen = bcrypt.generate_password_hash(passwd)
+        db.session.add(Utente(cf, nome, cognome, email, telefono, provincia, gen.decode("ascii")))
         db.session.commit()
 
 
@@ -28,18 +32,19 @@ class Utente(db.Model):
     mail = db.Column(db.Text(), nullable=False)
     telefono = db.Column(db.String(10), nullable=False)
     provincia = db.Column(db.Text(), nullable=False)    
-    password = db.relationship("Password", backref="utente", cascade="all,delete",lazy=False, uselist=False)
+    password = db.Column(db.Text(), nullable=False)  
 
-    def __init__(self, cf, nome, cognome, mail, telefono, provincia):
+    def __init__(self, cf, nome, cognome, mail, telefono, provincia, password):
         self.cf = cf
         self.nome = nome
         self.cognome = cognome
         self.mail = mail
         self.telefono = telefono
         self.provincia = provincia
+        self.password = password
 
     def __repr__(self):
-        return "Utente-{}: {} - {} - {} - {} - {}".format(self.cf, self.get_full_name(), self.mail, self.telefono, self.provincia, self.password)
+        return "{} - {} - {} - {} - {} - {}".format(self.cf, self.get_full_name(), self.mail, self.telefono, self.provincia, self.password)
 
     # Method to get the user full name
     def get_full_name(self):
@@ -59,6 +64,9 @@ class Utente(db.Model):
         del state["_sa_instance_state"]  # fa parte di db.model
         return state
 
+# Check that the candidate password for the given userid is correct
+def check_password(userid, candidate):
+    return bcrypt.check_password_hash(Utente.query(Utente.password).filter_by(id=userid).first().hash, candidate)
 
 # Create a User object from its json representation in session["user"]
 def get_user_from_json(json):   
@@ -91,8 +99,9 @@ def get_user_by_cf(cf1):
 
 
 # Add a new user to the database
-def add_user(cf, nome, cognome, email, telefono, provincia):
-    db.session.add(Utente(cf, nome, cognome, email, telefono, provincia))
+def add_user(cf, nome, cognome, email, telefono, provincia,password):
+    gen = bcrypt.generate_password_hash(password)
+    db.session.add(Utente(cf, nome, cognome, email, telefono, provincia, gen.decode("ascii")))
     db.session.commit()
     return {user.cf:user for user in Utente.query.all()}
 
