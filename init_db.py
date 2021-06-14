@@ -74,7 +74,9 @@ print(get_user_by_cf("RSSMRC21A01A794Y"))  # OK
 print("=======")
 print(get_patologia())   #ok
 print("=======")
-print(add_user("RSSLSN21A01A794Y", "Alessandro", "Rossi", "alessandro.rossi@unibg.it", "3270810777", "Bergamo","ciOA"))    # ok
+print(add_user("RSSLSN21A01A794Y", "Alessandro", "Rossi", "alessandro.rossi@unibg.it", "3270810777", "Bergamo","ciOA", {"diabete": True, "Ipertensione": False}))    # ok
+print("===CCDSFSVSED====")
+print(get_user_by_cf("RSSLSN21A01A794Y"))   # ok
 print("=======")
 print(get_appuntamentoByProvincia("Bergamo"))   # ok
 print("=======")
