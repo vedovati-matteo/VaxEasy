@@ -29,7 +29,7 @@ class CentroVaccinale(db.Model):
         self.id_ente = id_ente
 
     def __repr__(self):
-        return "CentroVaccinale-{}: {} - {} - {}".format(self.id_centroVacc, self.indirizzo, self.provincia, self.id_ente)
+        return "{} - {} - {} - {}".format(self.id_centroVacc, self.indirizzo, self.provincia, self.id_ente)
 
     def __setstate__(self, state):
         self.__dict__.update(state)
