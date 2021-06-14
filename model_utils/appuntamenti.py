@@ -35,6 +35,9 @@ class Appuntamento(db.Model):
 
     def __setstate__(self, state):
         self.__dict__.update(state)
+    
+    def to_json(self):
+        return jsonpickle.encode(self)
 
 def get_appuntamento_from_json(json): 
     return jsonpickle.decode(json)
