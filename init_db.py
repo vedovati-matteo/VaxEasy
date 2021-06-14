@@ -73,22 +73,9 @@ print("=======")
 print(get_user_by_cf("RSSMRC21A01A794Y"))  # OK
 print("=======")
 print(get_patologia())   #ok
-print("=======")
-print(add_user("RSSLSN21A01A794Y", "Alessandro", "Rossi", "alessandro.rossi@unibg.it", "3270810777", "Bergamo","ciOA", {"diabete": True, "Ipertensione": False}))    # ok
-print("===CCDSFSVSED====")
+print("====add_user====")
+print(add_user("RSSLSN21A01A794Y", "Alessandro", "Rossi", "alessandro.rossi@unibg.it", "3270810777", "Bergamo","ciOA", {"Diabete": True, "Ipertensione": False}))    # ok
+print("===get_user_by_cf====")
 print(get_user_by_cf("RSSLSN21A01A794Y")) 
-print(get_appuntamentoByProvincia("Bergamo"))   # ok
-print("=======")
-print(get_appuntamento_by_code("36740"))  # ok
-print("=== getVaccini====") 
-print(getVaccini("RSSMRC21A01A794Y"))  # ok
-print("=======")
-print(setPrenotazione("RSSMRC21A01A794Y", "26248698", "36740"))   # ok
-print("=======")
-print(getPrenotazioni("RSSMRC21A01A794Y"))   # ok 
-print("===cheeec====")
-a = get_user_by_cf("RSSMRC21A01A794Y")   
-b = a[0][0]
-print(a[1])
 
 

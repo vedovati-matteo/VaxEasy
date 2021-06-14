@@ -109,6 +109,5 @@ def add_user(cf, nome, cognome, email, telefono, provincia,password, patologie):
     gen = bcrypt.generate_password_hash(password)
     db.session.add(Utente(cf, nome, cognome, email, telefono, provincia, gen.decode("ascii")))
     db.session.commit()
-    return {user.cf:user for user in Utente.query.all()}
 
 
