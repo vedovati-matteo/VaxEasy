@@ -6,6 +6,7 @@ from app import db
 def _placeholderEnte_gen():
     id_ente1 = ("REG156","PROV3546","REG987")
     descrizione1 = ("regione Lombardia", "Provincia di Cuneo", "regione Lazio")
+    passwd1 = ("adsfasd", "fadsfasf", "hdffdh", "dfhshd","wt43dff")
 
     for id_ente, descrizione in zip(id_ente1, descrizione1):
         db.session.add(Ente(id_ente, descrizione))
