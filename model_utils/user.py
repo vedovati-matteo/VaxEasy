@@ -81,9 +81,6 @@ def get_users():
 # Recover a user by its CF with patologie
 def get_user_by_cf(cf1):
 
-    """patologie = {}
-    for patologia in Patologia.query.all():
-        patologie(patologia) = patologia.nome"""
 
     patologie = {patologia.nome:patologia for patologia in Patologia.query.all()}
     for i in patologie:
