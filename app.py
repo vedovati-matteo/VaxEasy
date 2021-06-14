@@ -151,13 +151,14 @@ def landSignin():
 	}
 
 	add_user(
-		"cf": request.form.get("cf"),
-		"nome": request.form.get("nome"),
-		"cognome": request.form.get("cognome"),
-		"email": request.form.get("email"),
-		"tel": request.form.get("tel"),
-		"provincia": request.form.get("provincia"),
-		"tel": request.form.get("pw")
+		request.form.get("cf"),
+		request.form.get("nome"),
+		request.form.get("cognome"),
+		request.form.get("email"),
+		request.form.get("tel"),
+		request.form.get("provincia"),
+		request.form.get("pw"),
+		patologie
 	)
 
 	"""
