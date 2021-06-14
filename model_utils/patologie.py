@@ -22,7 +22,7 @@ class Patologia(db.Model):
         self.descrizione = descrizione
 
     def __repr__(self):
-        return "Patologia-{}: {}".format(self.nome, self.descrizione)
+        return "{} - {}".format(self.nome, self.descrizione)
 
     def __setstate__(self, state):
         self.__dict__.update(state)
