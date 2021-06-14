@@ -31,6 +31,9 @@ class CentroVaccinale(db.Model):
     def __repr__(self):
         return "{} - {} - {} - {}".format(self.id_centroVacc, self.indirizzo, self.provincia, self.id_ente)
 
+    def to_json(self):
+        return jsonpickle.encode(self)
+
     def __setstate__(self, state):
         self.__dict__.update(state)
 

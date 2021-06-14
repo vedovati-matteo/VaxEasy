@@ -32,6 +32,9 @@ class Ente(db.Model):
     def __setstate__(self, state):
         self.__dict__.update(state)
 
+    def to_json(self):
+        return jsonpickle.encode(self)
+
     # non vogliamo che nel cookie compaiano le seguente cose
     def __getstate__(self):
         state = self.__dict__.copy()
