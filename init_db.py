@@ -1,6 +1,6 @@
 from app import db
 from model_utils.prenotazioni import Prenotazione, _placeholderPrenotazione_gen, setPrenotazione, getPrenotazioni
-from model_utils.user import Utente, _placeholderUtente_gen, get_user_by_cf, add_user
+from model_utils.user import Utente, _placeholderUtente_gen, check_password, get_user_by_cf, add_user, check_password
 from model_utils.appuntamenti import Appuntamento, _placeholderAppuntamento_gen, get_appuntamentoByProvincia, get_appuntamento_by_code
 from model_utils.centriVaccinali import CentroVaccinale, _placeholderCentroVaccinale_gen
 from model_utils.malattie import Malattia, _placeholderMalattia_gen
@@ -85,5 +85,7 @@ print("=======")
 print(setPrenotazione("RSSMRC21A01A794Y", "26248698", "36740"))   # ok
 print("=======")
 print(getPrenotazioni("RSSMRC21A01A794Y"))   # ok 
+print("=======")
+print(check_password("RSSLSN21A01A794Y","ciOA"))   # ok 
 
 

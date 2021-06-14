@@ -108,11 +108,11 @@ def login():
 @app.route('/landingLogin', methods=["POST"])
 def landLogin():
 
-	campi = getUserById(request.form.get("cf"))
+	campi = get_user_by_cf(request.form.get("cf"))
 
-	if campi:
+	if len(campi[0]) > 0:
 		# check password
-		if checkPassword(campi["cf"], request.form.get("pw")):
+		if check_password(campi[0][0], request.form.get("pw")):
 	
 			session["user"] = campi
 			return redirect(url_for("home"))
@@ -194,6 +194,7 @@ def listaPrenotazioni():
 
 if __name__ == '__main__':
 	from model_utils.patologie import get_patologia
+	from model_utils.user import get_user_by_cf, check_password
 	app.run(host='127.0.0.1', port=5000, debug=True)
 	
 
