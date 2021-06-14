@@ -101,9 +101,8 @@ def get_user_by_cf(cf1):
 # Add a new user to the database
 def add_user(cf, nome, cognome, email, telefono, provincia,password, patologie):
 
-    for k,v in patologie.items():
-        if(v == True):
-            db.session.add(PatologiaUtente(cf, k))
+    for i in range(len(patologie)):
+        db.session.add(PatologiaUtente(cf, patologie[i]))
 
 
     gen = bcrypt.generate_password_hash(password)
