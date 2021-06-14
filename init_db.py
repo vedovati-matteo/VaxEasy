@@ -80,10 +80,7 @@ print(get_user_by_cf("RSSMRC21A01A794Y"))  # OK
 print("=======")
 print(get_patologia())   #ok
 print("=======")
-add_user("RSSLSN21A01A794Y", "Alessandro", "Rossi", "alessandro.rossi@unibg.it", "3270810777", "Bergamo")    # ok
-print("======= PRINT DI USER========")
-for u in users:
-    print(u)
+print(add_user("RSSLSN21A01A794Y", "Alessandro", "Rossi", "alessandro.rossi@unibg.it", "3270810777", "Bergamo"))    # ok
 print("=======")
 print(get_appuntamentoByProvincia("Bergamo"))   # ok
 print("=======")

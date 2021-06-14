@@ -78,13 +78,15 @@ def get_user_by_cf(cf1):
         patologie(patologia) = patologia.nome"""
 
     patologie = {patologia.nome:patologia for patologia in Patologia.query.all()}
-    for pat in Utente.query.join(PatologiaUtente).filter_by(cf=cf1).all():
-        if(pat != None):
-            patologie[pat.nome] = True
-        else:
-            patologie[pat.nome] = False
+    for i in patologie:
+        for pat in PatologiaUtente.query.filter_by(cf=cf1).all():
+            if(pat.patologia == patologie[i].nome):
+                patologie[i] = True
+            else:
+                patologie[i] = False
         
-    return [Utente.query.filter_by(cf=cf1).all(),patologie]
+        
+    return [Utente.query.filter_by(cf=cf1).all(), patologie]
 
 
 
@@ -92,5 +94,6 @@ def get_user_by_cf(cf1):
 def add_user(cf, nome, cognome, email, telefono, provincia):
     db.session.add(Utente(cf, nome, cognome, email, telefono, provincia))
     db.session.commit()
+    return {user.cf:user for user in Utente.query.all()}
 
 
