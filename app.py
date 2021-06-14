@@ -3,10 +3,24 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt  # flask.ext no longer exists
 from flask_hashing import Hashing
 from flask_resize import Resize
+
+
+
 import os
 
 app = Flask(__name__)
 app.secret_key = "super secret key"
+
+root = app.root_path
+app.config["RESIZE_URL"] = "/avatars"
+bcrypt = Bcrypt(app)
+
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///{}/{}'.format(root, "db/vax.db")
+app.config["SQLALCHEMY_ECHO"] = True
+db = SQLAlchemy(app)
+
+
+
 
 
 # ______funz da fare
@@ -94,7 +108,7 @@ def login():
 @app.route('/landingLogin', methods=["POST"])
 def landLogin():
 
-	campi = getUserByCf(request.form.get("cf"))
+	campi = getUserById(request.form.get("cf"))
 
 	if campi:
 		# check password
@@ -109,7 +123,7 @@ def landLogin():
 # ====> SIGNIN
 @app.route('/signin')
 def signin():
-	return render_template("user_identification/signin.html", patologie = getPatologie())
+	return render_template("user_identification/signin.html", patologie = get_patologia())
 
 @app.route('/landingSignin', methods=["POST"])
 def landSignin():
@@ -176,17 +190,10 @@ def prenota():
 def listaPrenotazioni():
 	return render_template("prenotazione/listaPrenotazioni.html", prenotazioni=getPrenotazioni(session["user"]["cf"]))
 
-root = app.root_path
-app.secret_key = "Very Strong Password"
-app.config["RESIZE_URL"] = "/avatars"
-bcrypt = Bcrypt(app)
-
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///{}/{}'.format(root, "db/vax.db")
-app.config["SQLALCHEMY_ECHO"] = True
-db = SQLAlchemy(app)
 
 
 if __name__ == '__main__':
+	from model_utils.patologie import get_patologia
 	app.run(host='127.0.0.1', port=5000, debug=True)
 	
 
