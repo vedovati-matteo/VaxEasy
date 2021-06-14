@@ -33,7 +33,7 @@ class PatologiaUtente(db.Model):
 
 
 # Add a new patologia to the database
-def add_prenotazione(new_cf, new_patologia):
+def add_patologiaUtente(new_cf, new_patologia):
     db.session.add(PatologiaUtente(new_cf, new_patologia))
     db.session.commit()
 

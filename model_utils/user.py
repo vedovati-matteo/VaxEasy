@@ -1,6 +1,6 @@
 from controller_utils.password_handler import Password
 from model_utils.patologie import Patologia
-from model_utils.patologieUtente import PatologiaUtente
+from model_utils.patologieUtente import PatologiaUtente, add_patologiaUtente
 import jsonpickle
 from app import bcrypt
 from app import db
@@ -103,7 +103,7 @@ def add_user(cf, nome, cognome, email, telefono, provincia,password, patologie):
 
     for k,v in patologie.items():
         if(v == True):
-            db.session.add(PatologiaUtente(cf, k))
+            add_patologiaUtente(cf,k)
 
 
     gen = bcrypt.generate_password_hash(password)
