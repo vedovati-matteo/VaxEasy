@@ -15,7 +15,7 @@ def _placeholderEnte_gen():
         db.session.commit()
 
 
-# Class representing vax
+# Class representing vaxq
 class Ente(db.Model):
     id_ente = db.Column(db.String(6), unique=True, primary_key=True)
     descrizione = db.Column(db.Text(), nullable=False)    
