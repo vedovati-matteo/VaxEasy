@@ -112,6 +112,7 @@ def landLogin():
 
 	if len(campi[0]) > 0:
 		# check password
+		par = Utente.__repr__(campi[0])
 		if check_password(campi[0][0], request.form.get("pw")):
 	
 			session["user"] = campi
@@ -194,7 +195,7 @@ def listaPrenotazioni():
 
 if __name__ == '__main__':
 	from model_utils.patologie import get_patologia
-	from model_utils.user import get_user_by_cf, check_password
+	from model_utils.user import get_user_by_cf, check_password, Utente
 	app.run(host='127.0.0.1', port=5000, debug=True)
 	
 
