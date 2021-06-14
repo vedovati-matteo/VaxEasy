@@ -24,6 +24,9 @@ class Patologia(db.Model):
     def __repr__(self):
         return "{} - {}".format(self.nome, self.descrizione)
 
+    def to_json(self):
+        return jsonpickle.encode(self)
+
     def __setstate__(self, state):
         self.__dict__.update(state)
 
